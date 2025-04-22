@@ -1,0 +1,127 @@
+static_resources:
+  listeners:
+  - name: listener_https
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 443
+    filter_chains:
+    - transport_socket:
+        name: envoy.transport_sockets.tls
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.DownstreamTlsContext
+          common_tls_context:
+            tls_certificates:
+            - certificate_chain:
+                filename: /etc/envoy/ssl/game.synca.io/fullchain.pem
+              private_key:
+                filename: /etc/envoy/ssl/game.synca.io/privkey.pem
+      filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_https
+          access_log:
+          - name: envoy.access_loggers.stderr
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StderrAccessLog
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains:
+              - game.synca.io
+              routes:
+              - match:
+                  prefix: /
+                route:
+                  cluster: game
+              response_headers_to_add:
+              - header:
+                  key: Cross-Origin-Embedder-Policy
+                  value: require-corp
+              - header:
+                  key: Cross-Origin-Opener-Policy
+                  value: same-origin
+              - header:
+                  key: Cross-Origin-Resource-Policy
+                  value: same-origin
+          http_filters:
+          - name: envoy.filters.http.compressor
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.compressor.v3.Compressor
+              response_direction_config:
+                common_config:
+                  min_content_length: 100
+                  content_type:
+                  - application/javascript
+                  - application/octet-stream
+                  - application/wasm
+                  - image/png
+              compressor_library:
+                name: text_optimized
+                typed_config:
+                  "@type": type.googleapis.com/envoy.extensions.compression.brotli.compressor.v3.Brotli
+                  window_bits: 10
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+  - name: listener
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+      filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          access_log:
+          - name: envoy.access_loggers.stderr
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StderrAccessLog
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: backend
+              domains: ["*"]
+              routes:
+              - match:
+                  prefix: "/.well-known/acme-challenge/"
+                route:
+                  cluster: acme_challenge_cluster
+              - match:
+                  prefix: "/"
+                redirect:
+                  path_redirect: "/"
+                  https_redirect: true
+          http_filters:
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+  clusters:
+  - name: acme_challenge_cluster
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: acme_challenge_cluster
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: acme-webserver
+                port_value: 80
+  - name: game
+    type: STRICT_DNS
+    load_assignment:
+      cluster_name: game
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: game
+                port_value: 80
