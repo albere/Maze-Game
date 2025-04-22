@@ -16,6 +16,15 @@ services:
       context: .
     restart: always
 
+  deploy:
+    build:
+      context: .
+      target: godot
+    volumes:
+    - ./dist:/src/build/dist
+    command: godot --verbose --headless --export-release "Web" --path . dist/index.html
+
+
 # CERTBOT
 
   certbot:
