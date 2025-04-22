@@ -1,0 +1,19 @@
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
+
+permissions:
+  contents: read
+
+
+jobs:
+  build:
+    name: Build game
+    runs-on: ubuntu-24.04
+    steps:
+    - run: |
+        echo "HELLO WORLD"
