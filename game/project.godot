@@ -17,8 +17,3 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 main_scene="res://Main.tscn"
-
-[display]
-
-window/size/viewport_width=690
-window/size/viewport_height=690
