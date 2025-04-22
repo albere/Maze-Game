@@ -21,9 +21,9 @@ services:
       context: .
       target: godot
     volumes:
-    - ./dist:/src/build/dist
-    command: cd game && godot --verbose --headless --export-release "Web" --path . ../dist/index.html
-
+    - ./game:/src/build/game
+    working_dir: /src/build/game
+    command: godot --verbose --headless --export-release "Web" --path . ./dist/index.html
 
 # CERTBOT
 
