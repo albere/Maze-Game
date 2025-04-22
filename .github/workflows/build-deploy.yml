@@ -18,3 +18,13 @@ jobs:
     - uses: actions/checkout@v4
     - run: |
         docker compose run deploy
+    - name: Deploy to Netlify (PR Preview)
+        id: netlify
+        run: |
+         DEPLOY_URL=$(netlify deploy \
+         --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
+         --site ${{ secrets.NETLIFY_SITE_ID }} \
+         --json \
+         --message "Deploy preview for PR #${{ github.event.pull_request.number }}" \
+         | jq -r .deploy_url)
+        echo "DEPLOY_URL=$DEPLOY_URL" >> $GITHUB_ENV
