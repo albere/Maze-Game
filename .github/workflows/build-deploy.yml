@@ -19,9 +19,9 @@ jobs:
     - run: |
         docker compose run deploy
     - name: Deploy to Netlify (PR Preview)
-        id: netlify
-        run: |
-         DEPLOY_URL=$(netlify deploy \
+      id: netlify
+      run: |
+        DEPLOY_URL=$(netlify deploy \
          --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} \
          --site ${{ secrets.NETLIFY_SITE_ID }} \
          --json \
