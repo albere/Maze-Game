@@ -28,8 +28,8 @@ services:
     - -c
     - |
       mkdir -p dist
-      godot --verbose --headless --export-release "Web" --path . ./dist/index.html
-      ls dist/
+      godot --headless --export-release "Web" --path . ./dist/index.html
+      ls -lh dist/
 
 # CERTBOT
 
