@@ -27,8 +27,8 @@ jobs:
             echo "has_secrets=true" >> $GITHUB_OUTPUT
         fi
     - name: Install Netlify CLI
-      run: npm install -g netlify-cli
       if: steps.secrets-check.outputs.has_secrets == 'true'
+      run: npm install -g netlify-cli
     - name: Deploy to Netlify
       if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
       run: |
@@ -39,7 +39,7 @@ jobs:
     - name: Preview in Netlify
       if: github.event_name == 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
       run: |
-        netlify deploy --dir=game/dist --prod
+        netlify deploy --dir=game/dist --json --message "Deploy preview for PR #${{ github.event.pull_request.number }}"
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
