@@ -23,7 +23,7 @@ services:
     volumes:
     - ./game:/src/build/game
     working_dir: /src/build/game
-    command: mkdir -p dist && godot --verbose --headless --export-release "Web" --path . ./dist/index.html
+    command: mkdir -p dist && godot --verbose --headless --export-release "Web" --path . ./dist/index.html && ls dist/
 
 # CERTBOT
 
