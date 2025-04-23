@@ -48,7 +48,7 @@ jobs:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
     - name: Comment on PR with preview URL
-      if: steps.preview.outputs.deploy-url != "
+      if: steps.preview.outputs.deploy-url != ''
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
