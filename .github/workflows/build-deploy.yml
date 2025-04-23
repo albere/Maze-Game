@@ -47,15 +47,15 @@ jobs:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
-      - name: Comment on PR with preview URL
-        if: steps.preview.outputs.deploy-url != "
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 Preview deployed: [${steps.preview.outputs.deploy-url}](${steps.preview.outputs.deploy-url})`
-            })
+    - name: Comment on PR with preview URL
+      if: steps.preview.outputs.deploy-url != "
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `🚀 Preview deployed: [${steps.preview.outputs.deploy-url}](${steps.preview.outputs.deploy-url})`
+          })
