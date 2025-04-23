@@ -39,7 +39,23 @@ jobs:
     - name: Preview in Netlify
       if: github.event_name == 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
       run: |
-        netlify deploy --dir=game/dist --json --message "Deploy preview for PR #${{ github.event.pull_request.number }}"
+        set -o pipefail
+        DEPLOY_URL=$(netlify deploy --dir=game/dist --json --message "Deploy preview for PR #${{ github.event.pull_request.number }}" | jq -r .deploy_url)
+        echo "deploy-url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Comment on PR with preview URL
+        if: steps.netlify.outputs.deploy-url != "
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Preview deployed: [${process.env.DEPLOY_URL}](${process.env.DEPLOY_URL})`
+            })
