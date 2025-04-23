@@ -13,18 +13,51 @@ permissions:
 jobs:
   build:
     name: Build game
+    permissions:
+      pull-requests: write
     runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - run: |
         docker compose run deploy
+    - name: Check if secrets are available
+      id: secrets-check
+      run: |
+        if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ]; then
+            echo "has_secrets=false" >> $GITHUB_OUTPUT
+        else
+            echo "has_secrets=true" >> $GITHUB_OUTPUT
+        fi
     - name: Install Netlify CLI
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      if: steps.secrets-check.outputs.has_secrets == 'true'
       run: npm install -g netlify-cli
     - name: Deploy to Netlify
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
       run: |
         netlify deploy --dir=game/dist --prod
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    - name: Preview in Netlify
+      id: preview
+      if: github.event_name == 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
+      run: |
+        set -o pipefail
+        DEPLOY_URL=$(netlify deploy --dir=game/dist --json --message "Deploy preview for PR #${{ github.event.pull_request.number }}" | jq -r .deploy_url)
+        echo "deploy-url=$DEPLOY_URL" >> $GITHUB_OUTPUT
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+    - name: Comment on PR with preview URL
+      if: steps.preview.outputs.deploy-url != ''
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `🚀 Preview deployed: [${{ steps.preview.outputs.deploy-url }}](${{ steps.preview.outputs.deploy-url }})`
+          })
