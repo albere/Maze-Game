@@ -28,6 +28,7 @@ jobs:
         fi
     - name: Install Netlify CLI
       run: npm install -g netlify-cli
+      if: steps.secrets-check.outputs.has_secrets == 'true'
     - name: Deploy to Netlify
       if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && steps.secrets-check.outputs.has_secrets == 'true'
       run: |
