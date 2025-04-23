@@ -22,7 +22,6 @@ jobs:
       run: npm install -g netlify-cli
     - name: Deploy to Netlify
       run: |
-        ls -lh game/dist
         netlify deploy --dir=game/dist --prod
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
