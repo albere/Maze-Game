@@ -9,7 +9,6 @@
 config_version=5
 
 [application]
-
 config/name="MazeGame"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4")
@@ -17,13 +16,9 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 main_scene="res://Main.tscn"
-<<<<<<< Updated upstream
-=======
 
 [display]
-
 window/size/viewport_width=690
 window/size/viewport_height=690
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
->>>>>>> Stashed changes
