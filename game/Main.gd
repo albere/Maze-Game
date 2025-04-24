@@ -1,19 +1,24 @@
 extends Node2D
 
 func _ready():
-    # Get the current screen size
+    adjust_maze_scale()
+
+func adjust_maze_scale():
     var screen_size = get_viewport().size
-    var maze_node = $Maze  # Adjust to your maze node's path
+    var maze_node = $Main  # Make sure this matches the node name in your scene
 
-    # Calculate the size that fills the screen while keeping it square
-    var target_size = max(screen_size.x, screen_size.y)
+    # This is your design resolution (690x690)
+    var base_maze_size = Vector2(690, 690)
 
-    # Scale the maze so it fills the screen exactly
-    var scale_factor = target_size / 690.0  # Your base square resolution
+    # Scale factor to make the maze fill the screen while staying square
+    var scale_factor = max(screen_size.x, screen_size.y) / base_maze_size.x
+
+    # Scale uniformly
     maze_node.scale = Vector2(scale_factor, scale_factor)
 
-    # Optional: Center the maze
-    maze_node.position = (screen_size - maze_node.get_rect().size * scale_factor) / 2
+    # Center the maze on screen
+    var scaled_maze_size = base_maze_size * scale_factor
+    maze_node.position = (screen_size - scaled_maze_size) / 2
 
 
 const CELL_SIZE = 15
