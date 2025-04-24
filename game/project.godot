@@ -20,7 +20,7 @@ main_scene="res://Main.tscn"
 
 [display]
 
-window/size/viewport_width=686
-window/size/viewport_height=686
+window/size/viewport_width=684
+window/size/viewport_height=684
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
