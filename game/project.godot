@@ -23,4 +23,4 @@ main_scene="res://Main.tscn"
 window/size/viewport_width=690
 window/size/viewport_height=690
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
