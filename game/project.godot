@@ -20,7 +20,7 @@ main_scene="res://Main.tscn"
 
 [display]
 
-func _ready():
-    var screen_width = get_viewport().size.x
-    var scale_factor = screen_width / $Main.get_rect().size.x  # or use a known width
-    $Main.scale = Vector2.ONE * scale_factor
+window/size/viewport_width=690
+window/size/viewport_height=690
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
