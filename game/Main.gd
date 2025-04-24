@@ -1,9 +1,5 @@
 extends Node2D
 
-func _ready():
-    self.scale = Vector2(1.001, 1.001)
-
-
 const CELL_SIZE = 15
 const ROWS = 41
 const COLS = 41
@@ -26,6 +22,9 @@ var end_1 = Vector2(1, 1)
 var end_2 = Vector2(COLS - 2, 1)
 var last_move_time = 0
 var move_delay = 0.2
+
+func _ready():
+    self.scale = Vector2(1.001, 1.001)
 
 func _ready():
     maze = generate_maze()
