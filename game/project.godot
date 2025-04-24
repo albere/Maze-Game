@@ -22,5 +22,5 @@ main_scene="res://Main.tscn"
 
 func _ready():
     var screen_width = get_viewport().size.x
-    var scale_factor = screen_width / $MazeGame.get_rect().size.x  # or use a known width
-    $MazeGame.scale = Vector2.ONE * scale_factor
+    var scale_factor = screen_width / $Main.get_rect().size.x  # or use a known width
+    $Main.scale = Vector2.ONE * scale_factor
