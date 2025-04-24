@@ -24,9 +24,6 @@ var last_move_time = 0
 var move_delay = 0.2
 
 func _ready():
-    self.scale = Vector2(1.001, 1.001)
-
-func _ready():
     maze = generate_maze()
     reset_maze()
     set_process(true)
