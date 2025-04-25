@@ -18,6 +18,14 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
 
+var maze = []
+var trail = []
+var player_pos = Vector2()
+var end_1 = Vector2(1, 1)
+var end_2 = Vector2(COLS - 2, 1)
+var last_move_time = 0
+var move_delay = 0.2
+
 # Then add this code in your _ready() function
 func _ready():
 	maze = generate_maze()
@@ -74,14 +82,6 @@ func process_movement(new_pos):
 	elif player_pos == end_2:
 		show_message("Brain")
 		reset_maze()
-
-var maze = []
-var trail = []
-var player_pos = Vector2()
-var end_1 = Vector2(1, 1)
-var end_2 = Vector2(COLS - 2, 1)
-var last_move_time = 0
-var move_delay = 0.2
 
 func reset_maze():
 	var m = generate_maze()
