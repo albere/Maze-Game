@@ -37,9 +37,7 @@ func _ready():
 	var dpad = dpad_scene.instantiate()
 	add_child(dpad)
 	
-	dpad.rect_min_size = Vector2(200, 200)  # Adjust the size as needed
-	dpad.rect_position = Vector2(get_viewport().size.x - dpad.rect_min_size.x - 16, get_viewport().size.y - dpad.rect_min_size.y - 16)
-
+	print("D-pad added to scene: ", dpad)
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
 	dpad.position = Vector2(WIDTH + 50, HEIGHT / 2 - 150)
