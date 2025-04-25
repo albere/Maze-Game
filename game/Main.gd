@@ -15,6 +15,66 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 @onready var heart_img = preload("res://assets/heart.png")
 @onready var brain_img = preload("res://assets/brain.jpg")
 
+# Add this near your other preloads in Main.gd
+@onready var dpad_scene = preload("res://d_pad.tscn")
+
+# Then add this code in your _ready() function
+func _ready():
+    maze = generate_maze()
+    reset_maze()
+    set_process(true)
+    queue_redraw()
+
+    # Add D-pad to the scene
+    var dpad = dpad_scene.instantiate()
+    add_child(dpad)
+
+    # Position the D-pad next to the maze
+    # Adjust these values based on your maze size and preferred position
+    dpad.position = Vector2(WIDTH + 50, HEIGHT / 2 - 150)
+
+   # Connect D-pad signals
+    dpad.connect("move_up", _on_dpad_move_up)
+    dpad.connect("move_down", _on_dpad_move_down)
+    dpad.connect("move_left", _on_dpad_move_left)
+    dpad.connect("move_right", _on_dpad_move_right)
+
+# Add these handler functions
+func _on_dpad_move_up():
+    if maze[player_pos.y - 1][player_pos.x] == 0:
+        var new_pos = player_pos + Vector2(0, -1)
+        process_movement(new_pos)
+
+func _on_dpad_move_down():
+    if maze[player_pos.y + 1][player_pos.x] == 0:
+        var new_pos = player_pos + Vector2(0, 1)
+        process_movement(new_pos)
+
+func _on_dpad_move_left():
+    if maze[player_pos.y][player_pos.x - 1] == 0:
+        var new_pos = player_pos + Vector2(-1, 0)
+        process_movement(new_pos)
+
+func _on_dpad_move_right():
+    if maze[player_pos.y][player_pos.x + 1] == 0:
+        var new_pos = player_pos + Vector2(1, 0)
+        process_movement(new_pos)
+
+# Add a helper function to handle movement logic
+func process_movement(new_pos):
+    if trail.size() > 1 and new_pos == trail[trail.size() - 2]:
+        trail.pop_back()
+    else:
+        trail.append(new_pos)
+    player_pos = new_pos
+
+    if player_pos == end_1:
+        show_message("Heart")
+        reset_maze()
+    elif player_pos == end_2:
+        show_message("Brain")
+        reset_maze()
+
 var maze = []
 var trail = []
 var player_pos = Vector2()
