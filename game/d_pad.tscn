@@ -39,7 +39,7 @@ region = Rect2(561, 659, 124, 168)
 atlas = ExtResource("1_y3dxe")
 region = Rect2(436, 184, 125, 123)
 
-[node name="DPad" type="Node2D"]
+[node name="DPad" type="CanvasLayer"]
 script = ExtResource("1_4we4i")
 
 [node name="Up" type="TouchScreenButton" parent="."]

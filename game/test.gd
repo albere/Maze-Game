@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 # Define signals for maze movement
 signal move_up
