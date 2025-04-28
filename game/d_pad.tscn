@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://2oqhvm2ynrmr"]
+
+[ext_resource type="Script" uid="uid://yp7a4miga2wr" path="res://test.gd" id="1_4we4i"]
+[ext_resource type="Texture2D" uid="uid://blapliao2lkgb" path="res://DPADs.png" id="1_y3dxe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4we4i"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(437, 73, 123, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wheci"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(431, 552, 136, 118)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayb3f"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(436, 308, 124, 133)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d8ts"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(436, 786, 123, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htumj"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(322, 185, 113, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ssim"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(315, 664, 121, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd1y6"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(560, 185, 113, 143)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkmxj"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(561, 659, 124, 168)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3dxe"]
+atlas = ExtResource("1_y3dxe")
+region = Rect2(436, 184, 125, 123)
+
+[node name="DPad" type="CanvasLayer"]
+script = ExtResource("1_4we4i")
+
+[node name="Up" type="TouchScreenButton" parent="."]
+position = Vector2(128, -8)
+texture_normal = SubResource("AtlasTexture_4we4i")
+texture_pressed = SubResource("AtlasTexture_wheci")
+
+[node name="Down" type="TouchScreenButton" parent="."]
+position = Vector2(128, 233)
+texture_normal = SubResource("AtlasTexture_ayb3f")
+texture_pressed = SubResource("AtlasTexture_0d8ts")
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2(15, 110)
+texture_normal = SubResource("AtlasTexture_htumj")
+texture_pressed = SubResource("AtlasTexture_4ssim")
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2(251, 110)
+texture_normal = SubResource("AtlasTexture_bd1y6")
+texture_pressed = SubResource("AtlasTexture_gkmxj")
+
+[node name="Center" type="Sprite2D" parent="."]
+position = Vector2(190, 173)
+texture = SubResource("AtlasTexture_y3dxe")
+
+[connection signal="pressed" from="Up" to="." method="_on_up_pressed"]
