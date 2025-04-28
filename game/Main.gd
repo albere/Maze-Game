@@ -31,19 +31,24 @@ var dpad_height = 100
 # Define these functions first, before calling them
 
 func find_center_node(dpad):
+	print("Searching for TrueCenter node...")
 	# Try to find a Sprite2D named "center"
 	if dpad.has_node("Truecenter"):
+		print("Found Truecenter as direct child")
 		return dpad.get_node("Truecenter")
 	
 	# Search through immediate children
 	for child in dpad.get_children():
+		print("Checking child:", child.name, " - class:", child.get_class())
 		if child.name == "Truecenter" and child is Node2D:
+			print("Found Truecenter as child")
 			return child
 	
 	# Search one level deeper
 	for child in dpad.get_children():
 		if child.has_node("Truecenter"):
 			var potential_center = child.get_node("Truecenter")
+			print("Found Truecenter in grandchild")
 			if potential_center is Node2D:
 				return potential_center
 	
@@ -74,7 +79,7 @@ func setup_landscape_mode(dpad):
 		print("Found center sprite in D-pad")
 		# Calculate how much to adjust to align the center sprite with maze center
 		var node_pos = center_node.position
-				
+		
 		dpad.offset.y = maze_center_y - node_pos.y
 		print("Adjusted D-pad position based on center sprite")
 	else:
