@@ -73,15 +73,17 @@ func setup_landscape_mode(dpad):
 	# Position the D-pad to the right side of the screen
 	var maze_center_y = HEIGHT / 2
 	dpad.offset = Vector2(WIDTH + 20, maze_center_y)
+	print("Initial D-pad position:", dpad.offset)
 	
 	var center_node = find_center_node(dpad)
 	if center_node:
-		print("Found center sprite in D-pad")
+		print("Found TrueCenter at position:", center_node.position)
+		print("Maze center Y:", maze_center_y)
 		# Calculate how much to adjust to align the center sprite with maze center
-		var node_pos = center_node.position
-		
-		dpad.offset.y = maze_center_y - node_pos.y
-		print("Adjusted D-pad position based on center sprite")
+		var adjustment = maze_center_y - center_node.position.y
+		print("Calculated adjustment:", adjustment)
+		dpad.offset.y = maze_center_y - center_node.position.y
+		print("Final D-pad position:", dpad.offset)
 	else:
 		print("Could not find center sprite in D-pad")
 		
