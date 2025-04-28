@@ -46,7 +46,7 @@ func setup_landscape_mode(dpad):
 	print("Setting up LANDSCAPE mode")
 	# Position the D-pad to the right side of the screen
 	var maze_center_y = HEIGHT / 2
-	dpad.offset = Vector2(WIDTH + 20, maze_center_y - (dpad_height / 2))
+	dpad.offset = Vector2(WIDTH + 20, maze_center_y)
 	# Adjust scale as needed
 	dpad.scale = Vector2(1.2, 1.2)
 
