@@ -45,14 +45,16 @@ func handle_orientation(dpad):
 func setup_landscape_mode(dpad):
 	print("Setting up LANDSCAPE mode")
 	# Position the D-pad to the right side of the screen
-	dpad.offset = Vector2(WIDTH + 10, (HEIGHT / 2) - (dpad_height / 2))
+	var maze_center_y = HEIGHT / 2
+	dpad.offset = Vector2(WIDTH + 20, maze_center_y - (dpad_height / 2))
 	# Adjust scale as needed
 	dpad.scale = Vector2(1.2, 1.2)
 
 func setup_portrait_mode(dpad):
 	print("Setting up PORTRAIT mode")
+	var maze_center_x = WIDTH / 2
 	# Position the D-pad at the bottom of the screen
-	dpad.offset = Vector2((WIDTH / 2) - (dpad_width / 2), HEIGHT + 10)
+	dpad.offset = Vector2(maze_center_x - (dpad_width / 2), HEIGHT + 20)
 	# Make D-pad bigger for touch in portrait mode
 	dpad.scale = Vector2(1.5, 1.5)
 	
