@@ -77,7 +77,7 @@ func setup_landscape_mode(dpad):
 		var sprite_size = center_sprite.get_rect().size * center_sprite.scale
 		var sprite_center_y = sprite_pos.y + (sprite_size.y / 2)
 		
-		dpad.offset.y = maze_center_y - sprite_pos.y
+		dpad.offset.y = maze_center_y - sprite_center_y
 		print("Adjusted D-pad position based on center sprite")
 	else:
 		print("Could not find center sprite in D-pad")
