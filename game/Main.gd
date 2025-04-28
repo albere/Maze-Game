@@ -74,6 +74,9 @@ func setup_landscape_mode(dpad):
 		print("Found center sprite in D-pad")
 		# Calculate how much to adjust to align the center sprite with maze center
 		var sprite_pos = center_sprite.position
+		var sprite_size = center_sprite.get_rect().size * center_sprite.scale
+		var sprite_center_y = sprite_pos.y + (sprite_size.y / 2)
+		
 		dpad.offset.y = maze_center_y - sprite_pos.y
 		print("Adjusted D-pad position based on center sprite")
 	else:
