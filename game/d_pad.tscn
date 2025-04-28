@@ -66,4 +66,7 @@ texture_pressed = SubResource("AtlasTexture_gkmxj")
 position = Vector2(190, 173)
 texture = SubResource("AtlasTexture_y3dxe")
 
+[node name="Truecenter" type="Node2D" parent="."]
+position = Vector2(190, 173)
+
 [connection signal="pressed" from="Up" to="." method="_on_up_pressed"]

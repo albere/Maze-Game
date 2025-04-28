@@ -32,19 +32,19 @@ var dpad_height = 100
 
 func find_center_sprite(dpad):
 	# Try to find a Sprite2D named "center"
-	if dpad.has_node("Center"):
-		return dpad.get_node("Center")
+	if dpad.has_node("Truecenter"):
+		return dpad.get_node("Truecenter")
 	
 	# Search through immediate children
 	for child in dpad.get_children():
-		if child.name == "Center" and child is Sprite2D:
+		if child.name == "Truecenter" and child is Node2D:
 			return child
 	
 	# Search one level deeper
 	for child in dpad.get_children():
-		if child.has_node("Center"):
-			var potential_center = child.get_node("Center")
-			if potential_center is Sprite2D:
+		if child.has_node("Truecenter"):
+			var potential_center = child.get_node("Truecenter")
+			if potential_center is Node2D:
 				return potential_center
 	
 	# If we get here, we couldn't find it
