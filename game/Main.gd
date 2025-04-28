@@ -29,6 +29,27 @@ var dpad_width = 100
 var dpad_height = 100
 
 # Define these functions first, before calling them
+
+func find_center_sprite(dpad):
+	# Try to find a Sprite2D named "center"
+	if dpad.has_node("center"):
+		return dpad.get_node("center")
+	
+	# Search through immediate children
+	for child in dpad.get_children():
+		if child.name == "center" and child is Sprite2D:
+			return child
+	
+	# Search one level deeper
+	for child in dpad.get_children():
+		if child.has_node("center"):
+			var potential_center = child.get_node("center")
+			if potential_center is Sprite2D:
+				return potential_center
+	
+	# If we get here, we couldn't find it
+	return null
+	
 func handle_orientation(dpad):
 	var screen_size = DisplayServer.window_get_size()
 	var width = screen_size.x
@@ -47,6 +68,17 @@ func setup_landscape_mode(dpad):
 	# Position the D-pad to the right side of the screen
 	var maze_center_y = HEIGHT / 2
 	dpad.offset = Vector2(WIDTH + 20, maze_center_y)
+	
+	var center_sprite = find_center_sprite(dpad)
+	if center_sprite:
+		print("Found center sprite in D-pad")
+		# Calculate how much to adjust to align the center sprite with maze center
+		var sprite_pos = center_sprite.position
+		dpad.offset.y = maze_center_y - sprite_pos.y
+		print("Adjusted D-pad position based on center sprite")
+	else:
+		print("Could not find center sprite in D-pad")
+		
 	# Adjust scale as needed
 	dpad.scale = Vector2(1.2, 1.2)
 
