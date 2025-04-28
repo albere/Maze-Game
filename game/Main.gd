@@ -26,6 +26,35 @@ var end_2 = Vector2(COLS - 2, 1)
 var last_move_time = 0
 var move_delay = 0.2
 
+# Define these functions first, before calling them
+func handle_orientation(dpad):
+	var screen_size = DisplayServer.window_get_size()
+	var width = screen_size.x
+	var height = screen_size.y
+	
+	print("DEBUG - Screen Width: ", width)
+	print("DEBUG - Screen Height: ", height)
+	
+	if width > height:
+		setup_landscape_mode(dpad)
+	else:
+		setup_portrait_mode(dpad)
+
+func setup_landscape_mode(dpad):
+	print("Setting up LANDSCAPE mode")
+	# Position the D-pad to the right side of the screen
+	dpad.offset = Vector2(WIDTH / 2 - 50, HEIGHT + 20)
+	# Adjust scale as needed
+	dpad.scale = Vector2(1.2, 1.2)
+
+func setup_portrait_mode(dpad):
+	print("Setting up PORTRAIT mode")
+	# Position the D-pad at the bottom of the screen
+	dpad.offset = Vector2(WIDTH + 20, HEIGHT / 2 - 50)
+	# Make D-pad bigger for touch in portrait mode
+	dpad.scale = Vector2(1.5, 1.5)
+	
+
 # Then add this code in your _ready() function
 func _ready():
 	maze = generate_maze()
@@ -37,6 +66,7 @@ func _ready():
 	var dpad = dpad_scene.instantiate()
 	add_child(dpad)
 	
+	handle_orientation(dpad)
 	
 	print("D-pad added to scene: ", dpad)
 	# Position the D-pad next to the maze
@@ -48,6 +78,7 @@ func _ready():
 	dpad.connect("move_left", _on_dpad_move_left)
 	dpad.connect("move_right", _on_dpad_move_right)
 
+	
 # Add these handler functions
 func _on_dpad_move_up():
 	if maze[player_pos.y - 1][player_pos.x] == 0:
