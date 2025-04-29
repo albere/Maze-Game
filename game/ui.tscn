@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://d3auwsct0eocm"]
+
+[ext_resource type="Texture2D" uid="uid://blp1anqb2jh4c" path="res://Maze Digital Outline.png" id="1_fyqef"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6e0p"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(306, 143, 227, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nltto"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(910, 135, 224, 199)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibotj"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(310, 541, 223, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5ude"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(909, 542, 224, 185)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4yjw"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(116, 319, 203, 267)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waa4j"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(721, 320, 188, 221)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok7cu"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(523, 319, 198, 267)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irxef"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(1116, 318, 207, 223)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2l4f"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(909, 335, 208, 206)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27fn8"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(652, 1051, 202, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5rqp"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(123, 1107, 209, 207)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nltto"]
+radius = 102.005
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyqef"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(944, 1051, 202, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs482"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(356, 1107, 209, 207)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6e0p"]
+radius = 99.0202
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxd00"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(1375, 0, 1185, 1400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etlur"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(0, 0, 1375, 1400)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Dpad" type="CanvasLayer" parent="."]
+
+[node name="Up" type="TouchScreenButton" parent="Dpad"]
+position = Vector2(1591, 87)
+texture_normal = SubResource("AtlasTexture_m6e0p")
+texture_pressed = SubResource("AtlasTexture_nltto")
+
+[node name="Down" type="TouchScreenButton" parent="Dpad"]
+position = Vector2(1595, 480)
+texture_normal = SubResource("AtlasTexture_ibotj")
+texture_pressed = SubResource("AtlasTexture_n5ude")
+
+[node name="Left" type="TouchScreenButton" parent="Dpad"]
+position = Vector2(1401, 258)
+texture_normal = SubResource("AtlasTexture_y4yjw")
+texture_pressed = SubResource("AtlasTexture_waa4j")
+
+[node name="Right" type="TouchScreenButton" parent="Dpad"]
+position = Vector2(1807, 258)
+texture_normal = SubResource("AtlasTexture_ok7cu")
+texture_pressed = SubResource("AtlasTexture_irxef")
+
+[node name="Center" type="Sprite2D" parent="Dpad"]
+position = Vector2(1708, 377)
+texture = SubResource("AtlasTexture_e2l4f")
+
+[node name="Buttons" type="CanvasLayer" parent="."]
+
+[node name="R_Maze" type="TextureButton" parent="Buttons"]
+offset_left = 1593.0
+offset_top = -250.0
+offset_right = 1795.0
+offset_bottom = -16.0
+texture_normal = SubResource("AtlasTexture_27fn8")
+texture_pressed = SubResource("AtlasTexture_n5rqp")
+
+[node name="C_Maze" type="CollisionShape2D" parent="Buttons/R_Maze"]
+visible = false
+position = Vector2(100, 101)
+shape = SubResource("CircleShape2D_nltto")
+
+[node name="R_Player" type="TextureButton" parent="Buttons"]
+offset_left = 1343.0
+offset_top = -423.0
+offset_right = 1545.0
+offset_bottom = -189.0
+texture_normal = SubResource("AtlasTexture_fyqef")
+texture_pressed = SubResource("AtlasTexture_gs482")
+
+[node name="C_Player" type="CollisionShape2D" parent="Buttons/R_Player"]
+visible = false
+position = Vector2(101, 100)
+shape = SubResource("CircleShape2D_m6e0p")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(1831, 147)
+texture = SubResource("AtlasTexture_cxd00")
+
+[node name="Screen" type="Sprite2D" parent="."]
+position = Vector2(551, 147)
+texture = SubResource("AtlasTexture_etlur")
