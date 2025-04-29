@@ -47,10 +47,10 @@ func _ready():
 	var dpad_left = ui.get_node("Dpad/Left")
 	var dpad_right = ui.get_node("Dpad/Right")
    # Connect D-pad signals
-	dpad_up.connect("move_up", _on_dpad_move_up)
-	dpad_down.connect("move_down", _on_dpad_move_down)
-	dpad_left.connect("move_left", _on_dpad_move_left)
-	dpad_right.connect("move_right", _on_dpad_move_right)
+	dpad_up.pressed.connect("move_up", _on_dpad_move_up)
+	dpad_down.pressed.connect("move_down", _on_dpad_move_down)
+	dpad_left.pressed.connect("move_left", _on_dpad_move_left)
+	dpad_right.pressed.connect("move_right", _on_dpad_move_right)
 
 # Add these handler functions
 func _on_dpad_move_up():
