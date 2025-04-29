@@ -16,7 +16,7 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 @onready var brain_img = preload("res://assets/brain.jpg")
 
 # Add this near your other preloads in Main.gd
-@onready var dpad_scene = preload("res://d_pad.tscn")
+@onready var ui_scene = preload("res://ui.tscn")
 
 var maze = []
 var trail = []
@@ -34,19 +34,23 @@ func _ready():
 	queue_redraw()
 
 	# Add D-pad to the scene
-	var dpad = dpad_scene.instantiate()
-	add_child(dpad)
+	var ui = ui_scene.instantiate()
+	add_child(ui)
 	
 	
-	print("D-pad added to scene: ", dpad)
+	print("D-pad added to scene: ", ui)
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
 
+	var dpad_up = ui.get_node("Dpad/Up")
+	var dpad_down = ui.get_node("Dpad/Down")
+	var dpad_left = ui.get_node("Dpad/Left")
+	var dpad_right = ui.get_node("Dpad/Right")
    # Connect D-pad signals
-	dpad.connect("move_up", _on_dpad_move_up)
-	dpad.connect("move_down", _on_dpad_move_down)
-	dpad.connect("move_left", _on_dpad_move_left)
-	dpad.connect("move_right", _on_dpad_move_right)
+	dpad_up.connect("move_up", _on_dpad_move_up)
+	dpad_down.connect("move_down", _on_dpad_move_down)
+	dpad_left.connect("move_left", _on_dpad_move_left)
+	dpad_right.connect("move_right", _on_dpad_move_right)
 
 # Add these handler functions
 func _on_dpad_move_up():
