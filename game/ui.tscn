@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://blp1anqb2jh4c" path="res://Maze Digital Outline.png" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://b5jmdxg2dhdtu" path="res://Ui.gd" id="1_m6e0p"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxd00"]
+atlas = ExtResource("1_fyqef")
+region = Rect2(1375, 0, 1185, 1400)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6e0p"]
 atlas = ExtResource("1_fyqef")
 region = Rect2(306, 143, 227, 192)
@@ -61,16 +65,17 @@ region = Rect2(356, 1107, 209, 207)
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6e0p"]
 radius = 99.0202
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cxd00"]
-atlas = ExtResource("1_fyqef")
-region = Rect2(1375, 0, 1185, 1400)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_etlur"]
 atlas = ExtResource("1_fyqef")
 region = Rect2(0, 0, 1375, 1400)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_m6e0p")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(1831, 147)
+texture = SubResource("AtlasTexture_cxd00")
 
 [node name="Dpad" type="CanvasLayer" parent="."]
 
@@ -125,10 +130,6 @@ texture_pressed = SubResource("AtlasTexture_gs482")
 visible = false
 position = Vector2(101, 100)
 shape = SubResource("CircleShape2D_m6e0p")
-
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(1831, 147)
-texture = SubResource("AtlasTexture_cxd00")
 
 [node name="Screen" type="Sprite2D" parent="."]
 position = Vector2(551, 147)
