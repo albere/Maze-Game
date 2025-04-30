@@ -18,6 +18,7 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
 @onready var screen_scene = preload("res://Screen.tscn")
+@onready var background_scene = preload("res://background.tscn")
 
 var maze = []
 var trail = []
@@ -110,6 +111,10 @@ func _ready():
 	var screen_border = screen_scene.instantiate()
 	add_child(screen_border)
 	print("Screen border added to scene:", screen_border)
+	
+	var background = background_scene.instantiate()
+	add_child(background)
+
 
 # Position the border sprite to frame the maze
 	var border_sprite = screen_border.get_node("Sprite2D")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtlucc3stp0g2"]
+
+[ext_resource type="Script" uid="uid://cvpwkrn4gkcja" path="res://background.gd" id="1_i7s6n"]
+[ext_resource type="Texture2D" uid="uid://cthbvx8lqtn4y" path="res://Maze Website Outline, just indentations.png" id="1_oabld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7s6n"]
+atlas = ExtResource("1_oabld")
+region = Rect2(1376, 0, 1184, 1400)
+
+[node name="Background" type="CanvasLayer"]
+script = ExtResource("1_i7s6n")
+
+[node name="Indentation_Layer" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_i7s6n")
