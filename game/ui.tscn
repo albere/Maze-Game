@@ -108,6 +108,7 @@ texture = SubResource("AtlasTexture_e2l4f")
 [node name="Buttons" type="CanvasLayer" parent="."]
 
 [node name="R_Maze" type="TextureButton" parent="Buttons"]
+visibility_layer = 3
 offset_left = 1593.0
 offset_top = -250.0
 offset_right = 1795.0
