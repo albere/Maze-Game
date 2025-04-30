@@ -11,7 +11,7 @@ const DARK_BLUE = Color(0.07, 0.22, 0.49)
 const WHITE = Color(1, 1, 1)
 const ORANGE = Color(0.91, 0.71, 0.19)
 
-@onready var player_img = preload("res://assets/supe.png")
+@onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/heart.png")
 @onready var brain_img = preload("res://assets/brain.jpg")
 

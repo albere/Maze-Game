@@ -44,15 +44,15 @@ func adjust_background():
 			available_height / 2
 		)
 		
-		# Calculate individual scales for width and height
+		# Calculate the texture dimensions from your AtlasTexture
 		var sprite_width = 1184.0  # Width from your texture
 		var sprite_height = 1400.0  # Height from your texture
 		
-		# Stretch to exactly fill the available space
-		var scale_x = available_width / sprite_width
-		var scale_y = available_height / sprite_height
+		# Stretch to fill the available space, but reduce the scale
+		var scale_x = (available_width / sprite_width) * 0.5  # Reduce by 50%
+		var scale_y = (available_height / sprite_height) * 0.5  # Reduce by 50%
 		
-		# Apply different scales for X and Y to stretch and fill perfectly
+		# Apply scales for X and Y (reduced)
 		sprite.scale = Vector2(scale_x, scale_y)
 		
 	else:
@@ -69,15 +69,15 @@ func adjust_background():
 			maze_height + (available_height / 2)
 		)
 		
-		# Calculate individual scales for width and height
+		# Calculate the texture dimensions
 		var sprite_width = 1184.0  # Width from your texture
 		var sprite_height = 1400.0  # Height from your texture
 		
-		# Stretch to exactly fill the available space
-		var scale_x = available_width / sprite_width
-		var scale_y = available_height / sprite_height
+		# Stretch to fill the available space, but reduce the scale
+		var scale_x = (available_width / sprite_width) * 0.5  # Reduce by 50%
+		var scale_y = (available_height / sprite_height) * 0.5  # Reduce by 50%
 		
-		# Apply different scales for X and Y to stretch and fill perfectly
+		# Apply scales for X and Y (reduced)
 		sprite.scale = Vector2(scale_x, scale_y)
 	
-	print("Background stretched - Position:", sprite.position, " Scale:", sprite.scale)
+	print("Background adjusted - Position:", sprite.position, " Scale:", sprite.scale)
