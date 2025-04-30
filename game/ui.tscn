@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://d3auwsct0eocm"]
+[gd_scene load_steps=21 format=3 uid="uid://d3auwsct0eocm"]
 
 [ext_resource type="Texture2D" uid="uid://blp1anqb2jh4c" path="res://Maze Digital Outline.png" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://b5jmdxg2dhdtu" path="res://Ui.gd" id="1_m6e0p"]
+[ext_resource type="Script" uid="uid://wm4slr6v61a4" path="res://d_pad.gd" id="3_27fn8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cxd00"]
 atlas = ExtResource("1_fyqef")
@@ -78,6 +79,7 @@ position = Vector2(1831, 147)
 texture = SubResource("AtlasTexture_cxd00")
 
 [node name="Dpad" type="CanvasLayer" parent="."]
+script = ExtResource("3_27fn8")
 
 [node name="Up" type="TouchScreenButton" parent="Dpad"]
 position = Vector2(1591, 87)

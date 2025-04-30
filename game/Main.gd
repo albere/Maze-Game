@@ -41,17 +41,15 @@ func _ready():
 	print("D-pad added to scene: ", ui)
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
-
-	var dpad_up = ui.get_node("Dpad/Up")
-	var dpad_down = ui.get_node("Dpad/Down")
-	var dpad_left = ui.get_node("Dpad/Left")
-	var dpad_right = ui.get_node("Dpad/Right")
-   # Connect D-pad signals
-	dpad_up.pressed.connect("move_up", _on_dpad_move_up)
-	dpad_down.pressed.connect("move_down", _on_dpad_move_down)
-	dpad_left.pressed.connect("move_left", _on_dpad_move_left)
-	dpad_right.pressed.connect("move_right", _on_dpad_move_right)
-
+	var dpad = ui.get_node("Dpad")
+	
+	if dpad:
+		dpad.move_up.connect(_on_dpad_move_up)
+		dpad.move_down.connect(_on_dpad_move_down)
+		dpad.move_left.connect(_on_dpad_move_left)
+		dpad.move_right.connect(_on_dpad_move_right)
+	else:
+		print("ERROR: Dpad node not found in UI")
 # Add these handler functions
 func _on_dpad_move_up():
 	if maze[player_pos.y - 1][player_pos.x] == 0:
