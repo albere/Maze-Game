@@ -17,6 +17,7 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
+@onready var screen_scene = preload("res://Screen.tscn")
 
 var maze = []
 var trail = []
@@ -105,6 +106,19 @@ func _ready():
 	reset_maze()
 	set_process(true)
 	queue_redraw()
+	
+	var screen_border = screen_scene.instantiate()
+	add_child(screen_border)
+
+# Position the border sprite to frame the maze
+	var border_sprite = screen_border.get_node("Sprite2D")
+	if border_sprite:
+	# Center the border around the maze
+		border_sprite.position = Vector2(WIDTH/2, HEIGHT/2)
+	
+	# Scale the border to fit the maze size
+		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0)
+		border_sprite.scale = Vector2(scale_factor, scale_factor)
 
 	# Add D-pad to the scene
 	var dpad = dpad_scene.instantiate()
