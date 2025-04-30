@@ -109,16 +109,24 @@ func _ready():
 	
 	var screen_border = screen_scene.instantiate()
 	add_child(screen_border)
+	print("Screen border added to scene:", screen_border)
 
 # Position the border sprite to frame the maze
 	var border_sprite = screen_border.get_node("Sprite2D")
 	if border_sprite:
+		print("Border sprite found:", border_sprite)
 	# Center the border around the maze
 		border_sprite.position = Vector2(WIDTH/2, HEIGHT/2)
+		
+		print("Maze WIDTH:", WIDTH)
+		print("Maze HEIGHT:", HEIGHT)
+		print("Border sprite position set to:", border_sprite.position)
 	
 	# Scale the border to fit the maze size
 		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0)
 		border_sprite.scale = Vector2(scale_factor, scale_factor)
+		print("Border scale factor:", scale_factor)
+		print("Border sprite scale set to:", border_sprite.scale)
 
 	# Add D-pad to the scene
 	var dpad = dpad_scene.instantiate()
