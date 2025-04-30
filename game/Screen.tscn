@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bydmy63v20eth"]
+
+[ext_resource type="Texture2D" uid="uid://cj515poqxa5qn" path="res://Maze Digital Outline with writing.png" id="1_4vkur"]
+[ext_resource type="Script" uid="uid://bxxe3bhrquymh" path="res://screen_border.gd" id="2_ey8n5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhvop"]
+atlas = ExtResource("1_4vkur")
+region = Rect2(0, 0, 1404, 1400)
+
+[node name="ScreenBorder" type="CanvasLayer"]
+layer = -1
+script = ExtResource("2_ey8n5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(337.5, 337.5)
+texture = SubResource("AtlasTexture_rhvop")
