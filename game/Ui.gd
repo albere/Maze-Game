@@ -10,15 +10,23 @@ func _ready():
 func adjust_ui():
 	var viewport_size = get_viewport().size
 	
-	# Apply uniform scaling to entire UI
-	var scale_factor = 0.25
-	scale = Vector2(scale_factor, scale_factor)
+	# Apply uniform scaling to the entire UI
+	var scale_factor = 0.25  # Adjust as needed
 	
-	# Center UI based on orientation
+	# Get the entire UI to scale together
+	# Instead of positioning individual elements, we'll position the entire UI
+	
 	if viewport_size.x > viewport_size.y:
 		# Landscape orientation
-		offset = Vector2(viewport_size.x * 0.55, viewport_size.y * 0.5)
+		# Position UI to the right of the maze
+		offset = Vector2(viewport_size.x * 0.55 - 200, viewport_size.y * 0.5)
 	else:
 		# Portrait orientation
-		offset = Vector2(viewport_size.x * 0.5, viewport_size.y * 0.55)
-		print("Portrait")
+		# Position UI below the maze
+		offset = Vector2(viewport_size.x * 0.5, viewport_size.y * 0.75)
+	
+	# Apply scaling to the ENTIRE UI as one unit
+	scale = Vector2(scale_factor, scale_factor)
+	
+	# IMPORTANT: Don't set any positions or scales on child nodes
+	# Let them maintain their original relative positions
