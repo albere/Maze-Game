@@ -1,39 +1,31 @@
-# background.gd
 extends CanvasLayer
 
 func _ready():
-	# Initial setup
-	adjust_background()
+	print("Background script _ready called")
 	
-	# Connect to window resize signal
-	get_viewport().size_changed.connect(adjust_background)
-
-func adjust_background():
+	# Force the layer to be visible on top for debugging
+	layer = 10
+	
+	# Get the sprite
 	var sprite = $Indentation_Layer
-	if not sprite:
-		print("ERROR: Indentation_Layer not found")
-		return
-	
-	var viewport_size = get_viewport().size
-	var maze_width = 675  # Based on your maze dimensions
-	
-	# Position the background to the right of the maze in landscape mode
-	# or below the maze in portrait mode
-	if viewport_size.x > viewport_size.y:
-		# Landscape mode
-		sprite.position = Vector2(maze_width + (viewport_size.x - maze_width) / 2, viewport_size.y / 2)
+	if sprite:
+		print("Sprite found in background")
 		
-		# Scale to fill the remaining width while maintaining aspect ratio
-		var available_width = viewport_size.x - maze_width
-		var scale_factor = available_width / sprite.texture.get_width()
-		sprite.scale = Vector2(scale_factor, scale_factor)
+		# Force visibility
+		sprite.visible = true
+		
+		# Position in the center of the screen for now
+		var viewport_size = get_viewport().size
+		sprite.position = Vector2(viewport_size.x / 2, viewport_size.y / 2)
+		
+		# Use a small fixed scale to ensure it's not too large or small
+		sprite.scale = Vector2(0.5, 0.5)
+		
+		# Make it very visible with a bright color
+		sprite.modulate = Color(2.0, 0.0, 0.0)  # Very bright red
+		
+		print("Sprite positioned at:", sprite.position)
+		print("Sprite scale:", sprite.scale)
+		print("Sprite modulate:", sprite.modulate)
 	else:
-		# Portrait mode
-		sprite.position = Vector2(viewport_size.x / 2, maze_width + (viewport_size.y - maze_width) / 2)
-		
-		# Scale to fill the remaining height while maintaining aspect ratio
-		var available_height = viewport_size.y - maze_width
-		var scale_factor = available_height / sprite.texture.get_height()
-		sprite.scale = Vector2(scale_factor, scale_factor)
-	
-	print("Background adjusted - Position:", sprite.position, " Scale:", sprite.scale)
+		print("ERROR: Indentation_Layer not found")
