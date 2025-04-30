@@ -3,29 +3,81 @@ extends CanvasLayer
 func _ready():
 	print("Background script _ready called")
 	
-	# Force the layer to be visible on top for debugging
-	layer = 10
+	# Set to appear behind other elements
+	layer = -1
 	
+	# Initial setup
+	adjust_background()
+	
+	# Connect to window resize signal
+	get_viewport().size_changed.connect(adjust_background)
+
+func adjust_background():
 	# Get the sprite
 	var sprite = $Indentation_Layer
-	if sprite:
-		print("Sprite found in background")
-		
-		# Force visibility
-		sprite.visible = true
-		
-		# Position in the center of the screen for now
-		var viewport_size = get_viewport().size
-		sprite.position = Vector2(viewport_size.x / 2, viewport_size.y / 2)
-		
-		# Use a small fixed scale to ensure it's not too large or small
-		sprite.scale = Vector2(0.5, 0.5)
-		
-		# Make it very visible with a bright color
-		sprite.modulate = Color(2.0, 0.0, 0.0)  # Very bright red
-		
-		print("Sprite positioned at:", sprite.position)
-		print("Sprite scale:", sprite.scale)
-		print("Sprite modulate:", sprite.modulate)
-	else:
+	if not sprite:
 		print("ERROR: Indentation_Layer not found")
+		return
+	
+	# Get viewport size
+	var viewport_size = get_viewport().size
+	print("Viewport size:", viewport_size)
+	
+	# Maze dimensions
+	var maze_width = 675
+	var maze_height = 675
+	
+	# Return to normal color
+	sprite.modulate = Color(1.0, 1.0, 1.0)
+	
+	if viewport_size.x > viewport_size.y:
+		# Landscape mode - position to the right of the maze
+		print("Landscape mode detected")
+		
+		# Calculate available space to the right of the maze
+		var available_width = viewport_size.x - maze_width
+		var available_height = viewport_size.y
+		
+		# Set position to center of available space
+		sprite.position = Vector2(
+			maze_width + (available_width / 2),
+			available_height / 2
+		)
+		
+		# Calculate individual scales for width and height
+		var sprite_width = 1184.0  # Width from your texture
+		var sprite_height = 1400.0  # Height from your texture
+		
+		# Stretch to exactly fill the available space
+		var scale_x = available_width / sprite_width
+		var scale_y = available_height / sprite_height
+		
+		# Apply different scales for X and Y to stretch and fill perfectly
+		sprite.scale = Vector2(scale_x, scale_y)
+		
+	else:
+		# Portrait mode - position below the maze
+		print("Portrait mode detected")
+		
+		# Calculate available space below the maze
+		var available_width = viewport_size.x
+		var available_height = viewport_size.y - maze_height
+		
+		# Set position to center of available space
+		sprite.position = Vector2(
+			available_width / 2,
+			maze_height + (available_height / 2)
+		)
+		
+		# Calculate individual scales for width and height
+		var sprite_width = 1184.0  # Width from your texture
+		var sprite_height = 1400.0  # Height from your texture
+		
+		# Stretch to exactly fill the available space
+		var scale_x = available_width / sprite_width
+		var scale_y = available_height / sprite_height
+		
+		# Apply different scales for X and Y to stretch and fill perfectly
+		sprite.scale = Vector2(scale_x, scale_y)
+	
+	print("Background stretched - Position:", sprite.position, " Scale:", sprite.scale)
