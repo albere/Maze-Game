@@ -114,6 +114,7 @@ func _ready():
 	
 	var background = background_scene.instantiate()
 	add_child(background)
+	print("Background added to scene:", background)
 
 
 # Position the border sprite to frame the maze

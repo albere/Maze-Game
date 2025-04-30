@@ -11,4 +11,5 @@ region = Rect2(1376, 0, 1184, 1400)
 script = ExtResource("1_i7s6n")
 
 [node name="Indentation_Layer" type="Sprite2D" parent="."]
+visibility_layer = 513
 texture = SubResource("AtlasTexture_i7s6n")
