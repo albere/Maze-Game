@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmqlsmh11vxue"]
+
+[ext_resource type="Script" uid="uid://byd1fjxjm5kwg" path="res://background_full.gd" id="1_8lunu"]
+
+[node name="BackgroundFull" type="CanvasLayer"]
+script = ExtResource("1_8lunu")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
