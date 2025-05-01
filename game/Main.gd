@@ -19,6 +19,7 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 @onready var dpad_scene = preload("res://d_pad.tscn")
 @onready var screen_scene = preload("res://Screen.tscn")
 @onready var full_bg_scene = preload("res://background_full.tscn")
+@onready var top_left_ui_scene = preload("res://leftside.tscn")
 
 var maze = []
 var trail = []
@@ -115,6 +116,10 @@ func _ready():
 	var full_bg = full_bg_scene.instantiate()
 	add_child(full_bg)
 	print("Background added to scene:", full_bg)
+	
+	var top_left_ui = top_left_ui_scene.instantiate()
+	add_child(top_left_ui)
+	print("Top-left UI added to scene:", top_left_ui)
 
 
 # Position the border sprite to frame the maze

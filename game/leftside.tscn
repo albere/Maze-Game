@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bttexvvrp84yj"]
+[gd_scene load_steps=4 format=3 uid="uid://bttexvvrp84yj"]
 
 [ext_resource type="Texture2D" uid="uid://cthbvx8lqtn4y" path="res://Maze Website Outline, just indentations.png" id="1_l5ocs"]
+[ext_resource type="Script" uid="uid://d1bgvsp2hpm0s" path="res://top_left_ui.gd" id="1_r61ye"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r61ye"]
 atlas = ExtResource("1_l5ocs")
 region = Rect2(1360, 0, 649, 783)
 
-[node name="Leftside" type="Node2D"]
+[node name="TopLeftUI" type="CanvasLayer"]
+script = ExtResource("1_r61ye")
 
-[node name="Top_Left" type="TextureRect" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Top_Left" type="TextureRect" parent="Control"]
 offset_right = 269.0
 offset_bottom = 317.0
 texture = SubResource("AtlasTexture_r61ye")
 expand_mode = 1
+stretch_mode = 5
