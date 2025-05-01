@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmqlsmh11vxue"]
+[gd_scene load_steps=8 format=3 uid="uid://dmqlsmh11vxue"]
 
 [ext_resource type="Script" uid="uid://byd1fjxjm5kwg" path="res://background_full.gd" id="1_8lunu"]
 [ext_resource type="Texture2D" uid="uid://cthbvx8lqtn4y" path="res://Maze Website Outline, just indentations.png" id="2_iepmi"]
@@ -15,6 +15,10 @@ region = Rect2(1938, 649, 621, 751)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3m2tu"]
 atlas = ExtResource("3_1wsfc")
 region = Rect2(1975, 1228, 519, 115)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i6xe"]
+atlas = ExtResource("2_iepmi")
+region = Rect2(1370, 0, 631, 758)
 
 [node name="BackgroundFull" type="CanvasLayer"]
 script = ExtResource("1_8lunu")
@@ -72,4 +76,16 @@ offset_bottom = -29.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = SubResource("AtlasTexture_3m2tu")
+expand_mode = 1
+
+[node name="Top_Left" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -337.5
+offset_right = -68.5
+offset_bottom = 317.0
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_4i6xe")
 expand_mode = 1
