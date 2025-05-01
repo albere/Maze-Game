@@ -39,3 +39,12 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(0.30828, 0.346636)
 texture = SubResource("AtlasTexture_1wsfc")
+
+[node name="Bottom_Right2" type="TextureRect" parent="Background"]
+layout_mode = 1
+offset_right = 622.0
+offset_bottom = 758.0
+scale = Vector2(0.30828, 0.346636)
+texture = SubResource("AtlasTexture_1wsfc")
+flip_h = true
+flip_v = true
