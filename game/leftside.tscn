@@ -18,8 +18,8 @@ offset_bottom = 40.0
 
 [node name="Top_Left" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_left = 672.0
-offset_right = 941.0
+offset_left = 664.0
+offset_right = 933.0
 offset_bottom = 317.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_r61ye")
