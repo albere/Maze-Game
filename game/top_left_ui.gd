@@ -8,7 +8,7 @@ var margin_y = 20  # Vertical margin from the top of the screen
 
 func _ready():
 	# Set this layer to be above the background but below other UI if needed
-	layer = -5
+	layer = 5
 	
 	# Wait a frame to allow Main node to initialize
 	call_deferred("find_maze_reference")
