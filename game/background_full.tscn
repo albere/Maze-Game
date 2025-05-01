@@ -80,12 +80,12 @@ expand_mode = 1
 
 [node name="Top_Left" type="TextureRect" parent="Background"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -337.5
-offset_right = -68.5
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -675.0
+offset_right = -406.0
 offset_bottom = 317.0
-grow_horizontal = 2
+grow_horizontal = 0
 texture = SubResource("AtlasTexture_4i6xe")
 expand_mode = 1
