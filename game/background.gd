@@ -27,50 +27,59 @@ func adjust_background():
 	var maze_width = 675
 	var maze_height = 675
 	
+	# Return to normal color
+	sprite.modulate = Color(1.0, 1.0, 1.0)
+	
 	if viewport_size.x > viewport_size.y:
-		# Landscape mode - fill the right side
+		# Landscape mode - position to the right of the maze
 		print("Landscape mode detected")
 		
-		# Calculate the background dimensions directly
-		var bg_width = viewport_size.x - maze_width
-		var bg_height = maze_height  # Same height as maze
+		# Calculate available space to the right of the maze
+		var available_width = viewport_size.x - maze_width
+		var available_height = viewport_size.y
 		
-		# Calculate scale based on original texture size
-		var sprite_width = 1184.0
-		var sprite_height = 1400.0
+		# Calculate the texture dimensions from your AtlasTexture
+		var sprite_width = 1184.0  # Width from your texture
+		var sprite_height = 1400.0  # Height from your texture
 		
-		var scale_x = bg_width / sprite_width
-		var scale_y = bg_height / sprite_height
+		# Stretch to fill the available space - use a larger scale factor
+		var scale_x = available_width / sprite_width * 1.0  # Use full available width
+		var scale_y = available_height / sprite_height * 1.0  # Use full available height
 		
+		# Apply scales for X and Y
 		sprite.scale = Vector2(scale_x, scale_y)
 		
-		# Position exactly to the right of the maze
+		# Position precisely at the center of the available space
+		# Position the sprite to exactly fill the right side
 		sprite.position = Vector2(
-			maze_width + (bg_width / 2),
-			bg_height / 2
+			maze_width + (available_width / 2),
+			viewport_size.y / 2
 		)
 		
 	else:
-		# Portrait mode - fill the bottom
+		# Portrait mode - position below the maze
 		print("Portrait mode detected")
 		
-		# Calculate the background dimensions directly
-		var bg_width = maze_width  # Same width as maze
-		var bg_height = viewport_size.y - maze_height
+		# Calculate available space below the maze
+		var available_width = viewport_size.x
+		var available_height = viewport_size.y - maze_height
 		
-		# Calculate scale based on original texture size
-		var sprite_width = 1184.0
-		var sprite_height = 1400.0
+		# Calculate the texture dimensions
+		var sprite_width = 1184.0  # Width from your texture
+		var sprite_height = 1400.0  # Height from your texture
 		
-		var scale_x = bg_width / sprite_width
-		var scale_y = bg_height / sprite_height
+		# Stretch to fill the available space - use a larger scale factor
+		var scale_x = available_width / sprite_width * 1.0  # Use full available width
+		var scale_y = available_height / sprite_height * 1.0  # Use full available height
 		
+		# Apply scales for X and Y
 		sprite.scale = Vector2(scale_x, scale_y)
 		
-		# Position exactly below the maze
+		# Position precisely at the center of the available space
 		sprite.position = Vector2(
-			bg_width / 2,
-			maze_height + (bg_height / 2)
+			viewport_size.x / 2,
+			maze_height + (available_height / 2)
 		)
 	
 	print("Background adjusted - Position:", sprite.position, " Scale:", sprite.scale)
+	print("Sprite rect size:", sprite.texture.get_size() * sprite.scale)
