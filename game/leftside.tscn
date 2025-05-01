@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bttexvvrp84yj"]
+
+[ext_resource type="Texture2D" uid="uid://cthbvx8lqtn4y" path="res://Maze Website Outline, just indentations.png" id="1_l5ocs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r61ye"]
+atlas = ExtResource("1_l5ocs")
+region = Rect2(1360, 0, 649, 783)
+
+[node name="Leftside" type="Node2D"]
+
+[node name="Top_Left" type="TextureRect" parent="."]
+offset_right = 269.0
+offset_bottom = 317.0
+texture = SubResource("AtlasTexture_r61ye")
+expand_mode = 1
