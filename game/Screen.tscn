@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rhvop"]
 atlas = ExtResource("1_4vkur")
-region = Rect2(0, 0, 1404, 1400)
+region = Rect2(0, 0, 1404, 1399)
 
 [node name="ScreenBorder" type="CanvasLayer"]
 layer = -1
