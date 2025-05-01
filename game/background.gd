@@ -104,3 +104,17 @@ func adjust_background():
 			maze_x + (target_x / 2),  # Center of area to right of maze
 			target_y / 2              # Center of background height
 		)
+	if maze_node:
+		print("--------- IMPORTANT DEBUG INFO ---------")
+		print("Viewport height:", get_viewport().size.y)
+		print("Maze constant HEIGHT:", maze_node.HEIGHT)
+		
+		var parent = maze_node.get_parent()
+		print("Maze parent:", parent.name, " class:", parent.get_class())
+		
+		var root = get_tree().get_root()
+		print("Root window size:", root.size)
+		print("Root content scale factor:", root.content_scale_factor)
+		
+		print("Stretch mode:", ProjectSettings.get_setting("display/window/stretch/mode"))
+		print("Stretch aspect:", ProjectSettings.get_setting("display/window/stretch/aspect"))
