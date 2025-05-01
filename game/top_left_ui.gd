@@ -3,12 +3,12 @@ extends CanvasLayer
 var maze_reference = null
 
 # Adjust these margins as needed
-var margin_x = 40
-var margin_y = 20
+var margin_x = 40  # Horizontal margin from the maze
+var margin_y = 20  # Vertical margin from the top of the screen
 
 func _ready():
 	# Set this layer to be above the background but below other UI if needed
-	layer = 5
+	layer = -5
 	
 	# Wait a frame to allow Main node to initialize
 	call_deferred("find_maze_reference")
@@ -49,14 +49,18 @@ func update_position():
 	
 	if is_landscape:
 		# LANDSCAPE MODE
-		# Position to the right side of the maze
+		# Position to the top of the UI area that's to the right of the maze
 		var new_position = Vector2(
-			maze_width + margin_x,
-			margin_y
+			maze_width + margin_x,  # To the right of the maze
+			margin_y               # At the top of the screen
 		)
 		
 		ui_texture.position = new_position
 		print("Positioned TopLeftUI at:", new_position, " (landscape mode)")
+		
+		# Debug information
+		print("Maze width:", maze_width)
+		print("UI texture size:", ui_texture.size)
 	else:
 		# PORTRAIT MODE - placeholder for now
 		var new_position = Vector2(20, maze_height + margin_y)
