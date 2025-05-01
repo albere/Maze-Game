@@ -23,62 +23,31 @@ func adjust_background():
 	var viewport_size = get_viewport().size
 	print("Viewport size:", viewport_size)
 	
-	# Find the maze node
-	var maze_node = get_node("/root/Main")  # Adjust this path to your maze
+	# Try with a fixed width that looks right to you
+	# Adjust this value based on visual inspection
+	var bg_width = 850  # Try a smaller value than 925
+	var bg_height = viewport_size.y
 	
-	# Maze dimensions - use constants if maze_node is found, otherwise fallback values
-	var maze_width = 675
-	var maze_height = 675
-	
-	if maze_node:
-		if "WIDTH" in maze_node and "HEIGHT" in maze_node:
-			maze_width = maze_node.WIDTH
-			maze_height = maze_node.HEIGHT
-			print("Using maze dimensions from node - WIDTH:", maze_width, " HEIGHT:", maze_height)
-	
-	# Since we know the stretch mode is "viewport", calculate the scale factor manually
-	# Use a safe division to avoid dividing by zero
-	var scale_factor = 0.0
-	if maze_height > 0:  # Avoid division by zero
-		scale_factor = float(viewport_size.y) / float(maze_height)
-		print("Safe scale factor calculation:", viewport_size.y, " / ", maze_height, " = ", scale_factor)
-	else:
-		scale_factor = 0.79  # Fallback scale (533/675 ≈ 0.79)
-		print("Using fallback scale factor:", scale_factor)
-	
-	# Calculate actual displayed maze dimensions
-	var actual_maze_x = maze_width * scale_factor
-	var actual_maze_y = maze_height * scale_factor
-	print("Calculated actual maze dimensions - x:", actual_maze_x, " y:", actual_maze_y)
+	print("Using fixed background width:", bg_width)
 	
 	# Get original texture size
 	var texture_size = sprite.texture.get_size()
-	print("Original texture size:", texture_size)
-	
-	# Calculate dimensions for the background
-	var target_x = viewport_size.x - actual_maze_x
-	var target_y = actual_maze_y
-	print("Target dimensions - x:", target_x, " y:", target_y)
-	
-	# Ensure target dimensions are positive
-	if target_x <= 0:
-		target_x = 100  # Fallback value
-	if target_y <= 0:
-		target_y = 100  # Fallback value
 	
 	# Calculate scale factors
-	var scale_x = target_x / texture_size.x
-	var scale_y = target_y / texture_size.y
+	var scale_x = bg_width / texture_size.x
+	var scale_y = bg_height / texture_size.y
 	
 	# Apply scale
 	sprite.scale = Vector2(scale_x, scale_y)
 	
 	# Position sprite
+	# Assume the maze width is (viewport width - background width)
+	var maze_width = viewport_size.x - bg_width
 	sprite.position = Vector2(
-		actual_maze_x + (target_x / 2),
-		target_y / 2
+		maze_width + (bg_width / 2),
+		bg_height / 2
 	)
 	
-	print("Background adjusted - Position:", sprite.position)
-	print("Background adjusted - Scale:", sprite.scale)
+	print("Background positioned at:", sprite.position)
+	print("Background scaled to:", sprite.scale)
 	print("Final background size:", Vector2(texture_size.x * scale_x, texture_size.y * scale_y))
