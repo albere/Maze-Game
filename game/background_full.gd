@@ -9,7 +9,7 @@ func _ready():
 	
 	# Create a color rectangle
 	var bg_rect = ColorRect.new()
-	bg_rect.color = background_color
+	bg_rect.color = Color("#888585")
 	add_child(bg_rect)
 	
 	# Set size to cover the entire viewport
