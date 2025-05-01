@@ -47,8 +47,9 @@ texture = SubResource("AtlasTexture_1wsfc")
 
 [node name="Radio" type="TextureRect" parent="Background"]
 layout_mode = 0
-offset_left = 472.0
-offset_right = 669.0
-offset_bottom = 216.0
+offset_left = 448.0
+offset_top = 424.0
+offset_right = 645.0
+offset_bottom = 640.0
 texture = SubResource("AtlasTexture_u7a2i")
 expand_mode = 1
