@@ -50,4 +50,4 @@ func adjust_background():
 
 	print("Background positioned at:", sprite.position)
 	print("Background scaled to:", sprite.scale)
-	print("Final background size:", Vector2(texture_size.x * scale_x, texture_size.y * scale_y))
+	print("Final background sizetest:", Vector2(texture_size.x * scale_x, texture_size.y * scale_y))
