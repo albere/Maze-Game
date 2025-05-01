@@ -117,4 +117,4 @@ func adjust_background():
 		print("Root content scale factor:", root.content_scale_factor)
 		
 		print("Stretch mode:", ProjectSettings.get_setting("display/window/stretch/mode"))
-		print("Stretch aspect:", ProjectSettings.get_setting("display/window/stretch/aspect"))
+		print("Stretch aspect test:", ProjectSettings.get_setting("display/window/stretch/aspect"))
