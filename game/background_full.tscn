@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://cj515poqxa5qn" path="res://Maze Digital Outline with writing.png" id="3_1wsfc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wsfc"]
-atlas = ExtResource("2_iepmi")
-region = Rect2(1930, 634, 622, 758)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7a2i"]
 atlas = ExtResource("3_1wsfc")
 region = Rect2(2105, 0, 453, 477)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7a2i"]
+atlas = ExtResource("2_iepmi")
+region = Rect2(1938, 649, 621, 751)
 
 [node name="BackgroundFull" type="CanvasLayer"]
 script = ExtResource("1_8lunu")
@@ -29,6 +29,17 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.533333, 0.521569, 0.521569, 1)
 
+[node name="Radio" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_bottom = 205.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_1wsfc")
+expand_mode = 1
+
 [node name="Bottom_Right" type="TextureRect" parent="Background"]
 layout_mode = 1
 anchors_preset = 3
@@ -36,20 +47,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -192.0
-offset_top = -264.0
-offset_right = 430.0
-offset_bottom = 494.0
+offset_left = -269.0
+offset_top = -317.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.30828, 0.346636)
-texture = SubResource("AtlasTexture_1wsfc")
-
-[node name="Radio" type="TextureRect" parent="Background"]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 424.0
-offset_right = 645.0
-offset_bottom = 640.0
 texture = SubResource("AtlasTexture_u7a2i")
 expand_mode = 1
