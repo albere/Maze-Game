@@ -128,33 +128,40 @@ texture = SubResource("AtlasTexture_4i6xe")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Dpad" type="CanvasLayer" parent="Background/Bottom_Right/Writing/Dpadshadow"]
+[node name="Control" type="Control" parent="Background/Bottom_Right/Writing"]
+anchors_preset = 0
+offset_left = -101.0
+offset_top = -317.0
+offset_right = 219.0
+offset_bottom = 3.0
 
-[node name="Up" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Dpadshadow/Dpad"]
+[node name="Dpad" type="CanvasLayer" parent="Background/Bottom_Right/Writing/Control"]
+
+[node name="Up" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Control/Dpad"]
 position = Vector2(926, 291)
 scale = Vector2(0.756097, 0.741667)
 texture_normal = SubResource("AtlasTexture_tfpi1")
 texture_pressed = SubResource("AtlasTexture_63nfw")
 
-[node name="Down" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Dpadshadow/Dpad"]
+[node name="Down" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Control/Dpad"]
 position = Vector2(924, 472)
 scale = Vector2(0.766129, 0.751879)
 texture_normal = SubResource("AtlasTexture_7283y")
 texture_pressed = SubResource("AtlasTexture_nswjo")
 
-[node name="Left" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Dpadshadow/Dpad"]
+[node name="Left" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Control/Dpad"]
 position = Vector2(835, 374)
 scale = Vector2(0.805309, 0.770833)
 texture_normal = SubResource("AtlasTexture_ajqx7")
 texture_pressed = SubResource("AtlasTexture_2itd1")
 
-[node name="Right" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Dpadshadow/Dpad"]
+[node name="Right" type="TouchScreenButton" parent="Background/Bottom_Right/Writing/Control/Dpad"]
 position = Vector2(1019, 372)
 scale = Vector2(0.787611, 0.783217)
 texture_normal = SubResource("AtlasTexture_ijo67")
 texture_pressed = SubResource("AtlasTexture_1nslm")
 
-[node name="Center" type="Sprite2D" parent="Background/Bottom_Right/Writing/Dpadshadow/Dpad"]
+[node name="Center" type="Sprite2D" parent="Background/Bottom_Right/Writing/Control/Dpad"]
 position = Vector2(971, 430.5)
 scale = Vector2(0.765999, 0.886179)
 texture = SubResource("AtlasTexture_5fxo1")
