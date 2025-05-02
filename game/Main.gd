@@ -71,7 +71,7 @@ func _ready():
 		print("Border sprite scale set to:", border_sprite.scale)
 
 	# Add D-pad to the scene
-	var ui_dpad = $BackgroundFull/Blanklayer/DPad  # Use the actual node path
+	var ui_dpad = $Blank/Blanklayer/DPad  # Use the actual node path
 	if ui_dpad:
 		ui_dpad.connect("move_up", _on_dpad_move_up)
 		ui_dpad.connect("move_down", _on_dpad_move_down)
