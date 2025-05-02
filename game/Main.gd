@@ -71,17 +71,21 @@ func _ready():
 		print("Border sprite scale set to:", border_sprite.scale)
 
 	# Add D-pad to the scene
-	var dpad = dpad_scene.instantiate()
-	add_child(dpad)
+	var ui_dpad = $BackgroundFull/Blanklayer/DPad  # Use the actual node path
+	if ui_dpad:
+		ui_dpad.connect("move_up", _on_dpad_move_up)
+		ui_dpad.connect("move_down", _on_dpad_move_down)
+		ui_dpad.connect("move_left", _on_dpad_move_left)
+		ui_dpad.connect("move_right", _on_dpad_move_right)
 	
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
 
    # Connect D-pad signals
-	dpad.connect("move_up", _on_dpad_move_up)
-	dpad.connect("move_down", _on_dpad_move_down)
-	dpad.connect("move_left", _on_dpad_move_left)
-	dpad.connect("move_right", _on_dpad_move_right)
+	ui_dpad.connect("move_up", _on_dpad_move_up)
+	ui_dpad.connect("move_down", _on_dpad_move_down)
+	ui_dpad.connect("move_left", _on_dpad_move_left)
+	ui_dpad.connect("move_right", _on_dpad_move_right)
 
 	
 # Add these handler functions
