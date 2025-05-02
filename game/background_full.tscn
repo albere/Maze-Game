@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmqlsmh11vxue"]
+
+[ext_resource type="Script" uid="uid://byd1fjxjm5kwg" path="res://background_full.gd" id="1_8lunu"]
+[ext_resource type="Texture2D" uid="uid://cthbvx8lqtn4y" path="res://Maze Website Outline, just indentations.png" id="2_iepmi"]
+[ext_resource type="Texture2D" uid="uid://cj515poqxa5qn" path="res://Maze Digital Outline with writing.png" id="3_1wsfc"]
+[ext_resource type="Texture2D" uid="uid://xuxivpxmygr5" path="res://Maze Digital Outline just dpad.png" id="4_u7a2i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wsfc"]
+atlas = ExtResource("3_1wsfc")
+region = Rect2(2105, 0, 453, 477)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7a2i"]
+atlas = ExtResource("2_iepmi")
+region = Rect2(1938, 649, 621, 751)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m2tu"]
+atlas = ExtResource("3_1wsfc")
+region = Rect2(1975, 1228, 519, 115)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i6xe"]
+atlas = ExtResource("4_u7a2i")
+region = Rect2(1492, 639, 684, 684)
+
+[node name="BackgroundFull" type="CanvasLayer"]
+script = ExtResource("1_8lunu")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.533333, 0.521569, 0.521569, 1)
+
+[node name="Radio" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_bottom = 205.0
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_1wsfc")
+expand_mode = 1
+
+[node name="Bottom_Right" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -269.0
+offset_top = -317.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_u7a2i")
+expand_mode = 1
+
+[node name="Writing" type="TextureRect" parent="Background/Bottom_Right"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -262.0
+offset_top = -70.0
+offset_right = -26.0
+offset_bottom = -29.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = SubResource("AtlasTexture_3m2tu")
+expand_mode = 1
+
+[node name="Dpadshadow" type="TextureRect" parent="Background/Bottom_Right/Writing"]
+layout_mode = 0
+offset_left = -101.0
+offset_top = -317.0
+offset_right = 219.0
+offset_bottom = 3.0
+texture = SubResource("AtlasTexture_4i6xe")
+expand_mode = 1
+stretch_mode = 5

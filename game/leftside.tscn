@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://bttexvvrp84yj"]
+
+[ext_resource type="Script" uid="uid://d1bgvsp2hpm0s" path="res://top_left_ui.gd" id="1_r61ye"]
+[ext_resource type="Texture2D" uid="uid://dn3s8n0hqto0e" path="res://Maze Digital Outline.png" id="3_8rpgu"]
+[ext_resource type="Texture2D" uid="uid://cgw1crue6hpc3" path="res://Maze Digital Outline no dpad.png" id="4_bbbf0"]
+[ext_resource type="Script" uid="uid://ctxmv0b6jx54t" path="res://bitmask.gd" id="4_tmbhc"]
+[ext_resource type="BitMap" uid="uid://bi4jw013pfgy2" path="res://buttonmask.bmp" id="4_v08pk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmbhc"]
+atlas = ExtResource("4_bbbf0")
+region = Rect2(1375, 33, 627, 733)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbbf0"]
+atlas = ExtResource("3_8rpgu")
+region = Rect2(944, 1051, 202, 234)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v08pk"]
+atlas = ExtResource("3_8rpgu")
+region = Rect2(356, 1107, 209, 207)
+
+[node name="TopLeftUI" type="CanvasLayer"]
+script = ExtResource("1_r61ye")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Topleftbuttons" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 666.0
+offset_top = 6.0
+offset_right = 935.0
+offset_bottom = 323.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_tmbhc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Reset" type="TextureButton" parent="Control/Topleftbuttons"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 36.0
+offset_right = 131.0
+offset_bottom = 151.0
+texture_normal = SubResource("AtlasTexture_bbbf0")
+texture_pressed = SubResource("AtlasTexture_v08pk")
+texture_click_mask = ExtResource("4_v08pk")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_tmbhc")
+
+[node name="Newm" type="TextureButton" parent="Control/Topleftbuttons"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 110.0
+offset_right = 239.0
+offset_bottom = 225.0
+texture_normal = SubResource("AtlasTexture_bbbf0")
+texture_pressed = SubResource("AtlasTexture_v08pk")
+texture_click_mask = ExtResource("4_v08pk")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_tmbhc")

@@ -39,31 +39,57 @@ region = Rect2(561, 659, 124, 168)
 atlas = ExtResource("1_y3dxe")
 region = Rect2(436, 184, 125, 123)
 
-[node name="DPad" type="CanvasLayer"]
+[node name="Blank" type="CanvasLayer"]
+
+[node name="Blanklayer" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.533333, 0.521569, 0.521569, 0)
+
+[node name="DPad" type="Control" parent="Blanklayer"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -347.0
+offset_top = -381.0
+offset_right = -347.0
+offset_bottom = -381.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.78, 0.78)
 script = ExtResource("1_4we4i")
 
-[node name="Up" type="TouchScreenButton" parent="."]
+[node name="Up" type="TouchScreenButton" parent="Blanklayer/DPad"]
 position = Vector2(128, -8)
 texture_normal = SubResource("AtlasTexture_4we4i")
 texture_pressed = SubResource("AtlasTexture_wheci")
 
-[node name="Down" type="TouchScreenButton" parent="."]
+[node name="Down" type="TouchScreenButton" parent="Blanklayer/DPad"]
 position = Vector2(128, 233)
 texture_normal = SubResource("AtlasTexture_ayb3f")
 texture_pressed = SubResource("AtlasTexture_0d8ts")
 
-[node name="Left" type="TouchScreenButton" parent="."]
+[node name="Left" type="TouchScreenButton" parent="Blanklayer/DPad"]
 position = Vector2(15, 110)
 texture_normal = SubResource("AtlasTexture_htumj")
 texture_pressed = SubResource("AtlasTexture_4ssim")
 
-[node name="Right" type="TouchScreenButton" parent="."]
+[node name="Right" type="TouchScreenButton" parent="Blanklayer/DPad"]
 position = Vector2(251, 110)
 texture_normal = SubResource("AtlasTexture_bd1y6")
 texture_pressed = SubResource("AtlasTexture_gkmxj")
 
-[node name="Center" type="Sprite2D" parent="."]
+[node name="Center" type="Sprite2D" parent="Blanklayer/DPad"]
 position = Vector2(190, 173)
 texture = SubResource("AtlasTexture_y3dxe")
 
-[connection signal="pressed" from="Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Up" to="Blanklayer/DPad" method="_on_up_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Down" to="Blanklayer/DPad" method="_on_down_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Left" to="Blanklayer/DPad" method="_on_left_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Right" to="Blanklayer/DPad" method="_on_right_pressed"]
