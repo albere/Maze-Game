@@ -39,15 +39,15 @@ func _ready():
 	reset_maze()
 	set_process(true)
 	queue_redraw()
-	
+
 	var screen_border = screen_scene.instantiate()
 	add_child(screen_border)
 	print("Screen border added to scene:", screen_border)
-	
+
 	var full_bg = full_bg_scene.instantiate()
 	add_child(full_bg)
 	print("Background added to scene:", full_bg)
-	
+
 	var top_left_ui = top_left_ui_scene.instantiate()
 	add_child(top_left_ui)
 	print("Top-left UI added to scene:", top_left_ui)
@@ -59,11 +59,11 @@ func _ready():
 		print("Border sprite found:", border_sprite)
 	# Center the border around the maze
 		border_sprite.position = Vector2(WIDTH/2, HEIGHT/2)
-		
+
 		print("Maze WIDTH:", WIDTH)
 		print("Maze HEIGHT:", HEIGHT)
 		print("Border sprite position set to:", border_sprite.position)
-	
+
 	# Scale the border to fit the maze size
 		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0)
 		border_sprite.scale = Vector2(scale_factor, scale_factor)
@@ -71,23 +71,22 @@ func _ready():
 		print("Border sprite scale set to:", border_sprite.scale)
 
 	# Add D-pad to the scene
-	var ui_dpad = $Blank/Blanklayer/DPad  # Use the actual node path
-	if ui_dpad:
-		ui_dpad.connect("move_up", _on_dpad_move_up)
-		ui_dpad.connect("move_down", _on_dpad_move_down)
-		ui_dpad.connect("move_left", _on_dpad_move_left)
-		ui_dpad.connect("move_right", _on_dpad_move_right)
-	
+	var dpad = dpad_scene.instantiate()
+	add_child(dpad)
+
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
 
-   # Connect D-pad signals
-	ui_dpad.connect("move_up", _on_dpad_move_up)
-	ui_dpad.connect("move_down", _on_dpad_move_down)
-	ui_dpad.connect("move_left", _on_dpad_move_left)
-	ui_dpad.connect("move_right", _on_dpad_move_right)
+	var dpad_control = dpad.get_node("Blanklayer/DPad")
+	if dpad_control:
+		dpad_control.connect("move_up", Callable(self, "_on_dpad_move_up"))
+		dpad_control.connect("move_down", Callable(self, "_on_dpad_move_down"))
+		dpad_control.connect("move_left", Callable(self, "_on_dpad_move_left"))
+		dpad_control.connect("move_right", Callable(self, "_on_dpad_move_right"))
+		print("D-pad signals connected successfully")
+	else:
+		print("Error: Could not find DPad control node")
 
-	
 # Add these handler functions
 func _on_dpad_move_up():
 	if maze[player_pos.y - 1][player_pos.x] == 0:

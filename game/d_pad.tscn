@@ -90,3 +90,6 @@ position = Vector2(190, 173)
 texture = SubResource("AtlasTexture_y3dxe")
 
 [connection signal="pressed" from="Blanklayer/DPad/Up" to="Blanklayer/DPad" method="_on_up_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Down" to="Blanklayer/DPad" method="_on_down_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Left" to="Blanklayer/DPad" method="_on_left_pressed"]
+[connection signal="pressed" from="Blanklayer/DPad/Right" to="Blanklayer/DPad" method="_on_right_pressed"]
