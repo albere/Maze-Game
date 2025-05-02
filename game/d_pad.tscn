@@ -48,9 +48,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_right = 675.0
-offset_bottom = 675.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 16.875
+anchor_bottom = 16.875
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.533333, 0.521569, 0.521569, 0)
 
 [node name="DPad" type="Control" parent="Control/ColorRect"]
@@ -61,9 +64,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -384.0
-offset_top = -392.0
+offset_top = -380.0
 offset_right = -384.0
-offset_bottom = -392.0
+offset_bottom = -380.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_4we4i")
