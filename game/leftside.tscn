@@ -50,3 +50,16 @@ texture_click_mask = ExtResource("4_v08pk")
 ignore_texture_size = true
 stretch_mode = 5
 script = ExtResource("4_tmbhc")
+
+[node name="Newm" type="TextureButton" parent="Control/Topleftbuttons"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 110.0
+offset_right = 239.0
+offset_bottom = 225.0
+texture_normal = SubResource("AtlasTexture_bbbf0")
+texture_pressed = SubResource("AtlasTexture_v08pk")
+texture_click_mask = ExtResource("4_v08pk")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("4_tmbhc")
