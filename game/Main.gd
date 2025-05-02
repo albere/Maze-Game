@@ -33,75 +33,6 @@ var dpad_height = 100
 
 # Define these functions first, before calling them
 
-func find_center_node(dpad):
-	print("Searching for TrueCenter node...")
-	# Try to find a Sprite2D named "center"
-	if dpad.has_node("Truecenter"):
-		print("Found Truecenter as direct child")
-		return dpad.get_node("Truecenter")
-	
-	# Search through immediate children
-	for child in dpad.get_children():
-		print("Checking child:", child.name, " - class:", child.get_class())
-		if child.name == "Truecenter" and child is Node2D:
-			print("Found Truecenter as child")
-			return child
-	
-	# Search one level deeper
-	for child in dpad.get_children():
-		if child.has_node("Truecenter"):
-			var potential_center = child.get_node("Truecenter")
-			print("Found Truecenter in grandchild")
-			if potential_center is Node2D:
-				return potential_center
-	
-	# If we get here, we couldn't find it
-	return null
-	
-func handle_orientation(dpad):
-	var screen_size = DisplayServer.window_get_size()
-	var width = screen_size.x
-	var height = screen_size.y
-	
-	print("DEBUG - Screen Width: ", width)
-	print("DEBUG - Screen Height: ", height)
-	
-	if width > height:
-		setup_landscape_mode(dpad)
-	else:
-		setup_portrait_mode(dpad)
-
-func setup_landscape_mode(dpad):
-	print("Setting up LANDSCAPE mode")
-	# Position the D-pad to the right side of the screen
-	var maze_center_y = HEIGHT / 2
-	dpad.offset = Vector2(WIDTH + 20, maze_center_y)
-	print("Initial D-pad position:", dpad.offset)
-	
-	var center_node = find_center_node(dpad)
-	if center_node:
-		print("Found TrueCenter at position:", center_node.position)
-		print("Maze center Y:", maze_center_y)
-		# Calculate how much to adjust to align the center sprite with maze center
-		var adjustment = maze_center_y - center_node.position.y
-		print("Calculated adjustment:", adjustment)
-		dpad.offset.y = maze_center_y - center_node.position.y
-		print("Final D-pad position:", dpad.offset)
-	else:
-		print("Could not find center sprite in D-pad")
-		
-	# Adjust scale as needed
-	dpad.scale = Vector2(1.2, 1.2)
-
-func setup_portrait_mode(dpad):
-	print("Setting up PORTRAIT mode")
-	var maze_center_x = WIDTH / 2
-	# Position the D-pad at the bottom of the screen
-	dpad.offset = Vector2(maze_center_x - (dpad_width / 2), HEIGHT + 20)
-	# Make D-pad bigger for touch in portrait mode
-	dpad.scale = Vector2(1.5, 1.5)
-	
-
 # Then add this code in your _ready() function
 func _ready():
 	maze = generate_maze()
@@ -143,9 +74,6 @@ func _ready():
 	var dpad = dpad_scene.instantiate()
 	add_child(dpad)
 	
-	handle_orientation(dpad)
-	
-	print("D-pad added to scene: ", dpad)
 	# Position the D-pad next to the maze
 	# Adjust these values based on your maze size and preferred position
 
