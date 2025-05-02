@@ -88,17 +88,13 @@ func update_position():
 		# Debug information
 		print("Maze width:", maze_width)
 		print("Positioned TopLeftUI texture at global position:", ui_texture.global_position)
-		
-		# Create a debug label to verify position
-		add_debug_marker(new_position)
+
 	else:
 		# PORTRAIT MODE - placeholder for now
 		var new_position = Vector2(20, maze_height + margin_y)
 		ui_texture.global_position = new_position
 		print("Positioned TopLeftUI at:", new_position, " (portrait mode - placeholder)")
 		
-		# Create a debug marker in portrait mode too
-		add_debug_marker(new_position)
 
 # Helper function to add a visible debug marker
 func add_debug_marker(pos):
