@@ -8,14 +8,14 @@ signal move_right
 
 func _ready():
 	# Ensure connections exist
-	if !$Up.is_connected("pressed", _on_up_pressed):
-		$Up.pressed.connect(_on_up_pressed)
-	if !$Down.is_connected("pressed", _on_down_pressed):
-		$Down.pressed.connect(_on_down_pressed)
-	if !$Left.is_connected("pressed", _on_left_pressed):
-		$Left.pressed.connect(_on_left_pressed)
-	if !$Right.is_connected("pressed", _on_right_pressed):
-		$Right.pressed.connect(_on_right_pressed)
+	if !$Background/DPad/Up.is_connected("pressed", _on_up_pressed):
+		$Background/DPad/Up.pressed.connect(_on_up_pressed)
+	if !$Background/DPad/Down.is_connected("pressed", _on_down_pressed):
+		$Background/DPad/Down.pressed.connect(_on_down_pressed)
+	if !$Background/DPad/Left.is_connected("pressed", _on_left_pressed):
+		$Background/DPad/Left.pressed.connect(_on_left_pressed)
+	if !$Background/DPad/Right.is_connected("pressed", _on_right_pressed):
+		$Background/DPad/Right.pressed.connect(_on_right_pressed)
 
 func _on_up_pressed() -> void:
 	print("Up pressed")
