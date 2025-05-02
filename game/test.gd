@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 # Define signals for maze movement
 signal move_up
