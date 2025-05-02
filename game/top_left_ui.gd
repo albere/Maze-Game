@@ -29,7 +29,7 @@ func _ready():
 		reset_button.texture_click_mask = bitmap
 	
 	# If you have a New button, connect it too
-	var new_button = $Control/Topleftbuttons/New  # Adjust path as needed
+	var new_button = $Control/Topleftbuttons/Newm  # Adjust path as needed
 	if new_button:
 		new_button.pressed.connect(_on_new_pressed)
 		print("New button connected")
@@ -66,7 +66,7 @@ func update_position():
 	var is_landscape = screen_size.x > screen_size.y
 	
 	# Get our UI texture
-	var ui_texture = $TopLeftTexture
+	var ui_texture = $Control/Topleftbuttons
 	if !ui_texture:
 		print("ERROR: TopLeftTexture not found!")
 		return
