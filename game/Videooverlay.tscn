@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://4p7gdgni2g75"]
+
+[ext_resource type="Script" uid="uid://dwelmxg4e1eo3" path="res://Videooverlay.gd" id="1_25lbf"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_25lbf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
