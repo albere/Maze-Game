@@ -65,7 +65,7 @@ func _ready():
 		print("Border sprite position set to:", border_sprite.position)
 
 	# Scale the border to fit the maze size
-		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0)
+		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0) + 0.01
 		border_sprite.scale = Vector2(scale_factor, scale_factor)
 		print("Border scale factor:", scale_factor)
 		print("Border sprite scale set to:", border_sprite.scale)
