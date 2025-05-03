@@ -30,6 +30,7 @@ var last_move_time = 0
 var move_delay = 0.2
 var dpad_width = 100
 var dpad_height = 100
+var can_move = true
 
 # Define these functions first, before calling them
 
@@ -89,24 +90,32 @@ func _ready():
 
 # Add these handler functions
 func _on_dpad_move_up():
-	if maze[player_pos.y - 1][player_pos.x] == 0:
+	if can_move and maze[player_pos.y - 1][player_pos.x] == 0:
 		var new_pos = player_pos + Vector2(0, -1)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_down():
-	if maze[player_pos.y + 1][player_pos.x] == 0:
+	if can_move and maze[player_pos.y + 1][player_pos.x] == 0:
 		var new_pos = player_pos + Vector2(0, 1)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_left():
-	if maze[player_pos.y][player_pos.x - 1] == 0:
+	if can_move and maze[player_pos.y][player_pos.x - 1] == 0:
 		var new_pos = player_pos + Vector2(-1, 0)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_right():
-	if maze[player_pos.y][player_pos.x + 1] == 0:
+	if can_move and maze[player_pos.y][player_pos.x + 1] == 0:
 		var new_pos = player_pos + Vector2(1, 0)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 # Add a helper function to handle movement logic
 func process_movement(new_pos):
@@ -162,6 +171,7 @@ func _is_valid(x, y):
 func _process(delta):
 	last_move_time += delta
 	if last_move_time >= move_delay:
+		can_move = true
 		handle_input()
 		last_move_time = 0
 	queue_redraw()
