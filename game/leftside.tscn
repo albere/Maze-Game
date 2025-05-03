@@ -29,10 +29,9 @@ offset_bottom = 40.0
 
 [node name="Topleftbuttons" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_left = 668.0
-offset_top = -35.0
-offset_right = 937.0
-offset_bottom = 282.0
+offset_left = 666.0
+offset_right = 935.0
+offset_bottom = 248.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_tmbhc")
 expand_mode = 1
@@ -41,9 +40,9 @@ stretch_mode = 5
 [node name="Reset" type="TextureButton" parent="Control/Topleftbuttons"]
 layout_mode = 0
 offset_left = 45.0
-offset_top = 68.0
+offset_top = 35.0
 offset_right = 131.0
-offset_bottom = 183.0
+offset_bottom = 150.0
 texture_normal = SubResource("AtlasTexture_bbbf0")
 texture_pressed = SubResource("AtlasTexture_v08pk")
 texture_click_mask = ExtResource("4_v08pk")
@@ -54,9 +53,9 @@ script = ExtResource("4_tmbhc")
 [node name="Newm" type="TextureButton" parent="Control/Topleftbuttons"]
 layout_mode = 0
 offset_left = 153.0
-offset_top = 143.0
+offset_top = 110.0
 offset_right = 239.0
-offset_bottom = 258.0
+offset_bottom = 225.0
 texture_normal = SubResource("AtlasTexture_bbbf0")
 texture_pressed = SubResource("AtlasTexture_v08pk")
 texture_click_mask = ExtResource("4_v08pk")
