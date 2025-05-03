@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dwelmxg4e1eo3" path="res://Videooverlay.gd" id="1_25lbf"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+layer = 10
 script = ExtResource("1_25lbf")
 
 [node name="Control" type="Control" parent="."]
