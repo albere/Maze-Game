@@ -221,10 +221,16 @@ func _draw():
 
 	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
-	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(45, 45))
+	
+	var heart_pos = end_1 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
+	var heart_rect = Rect2(heart_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(heart_img, heart_rect, false)
-	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(45, 45))
+	
+	# Brain icon - shift one square up and left
+	var brain_pos = end_2 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
+	var brain_rect = Rect2(brain_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(brain_img, brain_rect, false)
+
 
 	# draw_texture_rect(player_img, player_rect, false)
 	# draw_texture(player_img, (player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE)
