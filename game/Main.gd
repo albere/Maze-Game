@@ -14,12 +14,15 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
 @onready var brain_img = preload("res://assets/City.png")
+@onready var video_overlay_scene = preload("res://Videooverlay.tscn")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
 @onready var screen_scene = preload("res://Screen.tscn")
 @onready var full_bg_scene = preload("res://background_full.tscn")
 @onready var top_left_ui_scene = preload("res://leftside.tscn")
+
+
 
 var maze = []
 var trail = []
@@ -31,6 +34,7 @@ var move_delay = 0.2
 var dpad_width = 100
 var dpad_height = 100
 var can_move = true
+var video_overlay = null
 
 # Define these functions first, before calling them
 
@@ -52,6 +56,11 @@ func _ready():
 	var top_left_ui = top_left_ui_scene.instantiate()
 	add_child(top_left_ui)
 	print("Top-left UI added to scene:", top_left_ui)
+	
+	video_overlay = video_overlay_scene.instantiate()
+	add_child(video_overlay)
+	video_overlay.hide()
+	video_overlay.overlay_closed.connect(_on_overlay_closed)
 
 
 # Position the border sprite to frame the maze
@@ -87,6 +96,10 @@ func _ready():
 		print("D-pad signals connected successfully")
 	else:
 		print("Error: Could not find DPad control node")
+
+
+func _on_overlay_closed():
+	reset_maze()
 
 # Add these handler functions
 func _on_dpad_move_up():
@@ -126,10 +139,10 @@ func process_movement(new_pos):
 	player_pos = new_pos
 
 	if player_pos == end_1:
-		show_message("Heart")
+		show_ending("Heart")
 		reset_maze()
 	elif player_pos == end_2:
-		show_message("Brain")
+		show_ending("Brain")
 		reset_maze()
 
 func reset_maze():
@@ -200,21 +213,19 @@ func handle_input():
 		player_pos = new_pos
 
 		if player_pos == end_1:
-			show_message("Heart")
+			show_ending("Heart")
 			reset_maze()
 		elif player_pos == end_2:
-			show_message("Brain")
+			show_ending("Brain")
 			reset_maze()
 
-func show_message(text):
-	var label = Label.new()
-	label.text = text
-	label.add_theme_color_override("font_color", WHITE)
-	label.set_position(Vector2(WIDTH / 2, HEIGHT / 2))
-	add_child(label)
-	await get_tree().create_timer(2).timeout
-	remove_child(label)
-	label.queue_free()
+func show_ending(type):
+	var video_path = ""
+	if type == "Heart":
+		video_path = "res://assets/heart_ending.ogv"  # You'll need to add this video
+	else:  # Brain
+		video_path = "res://assets/brain_ending.ogv"  # You'll need to add this video
+		video_overlay.show_video(video_path)
 
 func _draw():
 	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), DARK_BLUE)
