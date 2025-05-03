@@ -140,10 +140,9 @@ func process_movement(new_pos):
 
 	if player_pos == end_1:
 		show_ending("Heart")
-		reset_maze()
+		
 	elif player_pos == end_2:
 		show_ending("Brain")
-		reset_maze()
 
 func reset_maze():
 	var m = generate_maze()
@@ -214,10 +213,8 @@ func handle_input():
 
 		if player_pos == end_1:
 			show_ending("Heart")
-			reset_maze()
 		elif player_pos == end_2:
 			show_ending("Brain")
-			reset_maze()
 
 func show_ending(type):
 	var video_path = ""
