@@ -12,8 +12,8 @@ const WHITE = Color(1, 1, 1)
 const ORANGE = Color(0.91, 0.71, 0.19)
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
-@onready var heart_img = preload("res://assets/heart.png")
-@onready var brain_img = preload("res://assets/brain.jpg")
+@onready var heart_img = preload("res://assets/Mental.png")
+@onready var brain_img = preload("res://assets/City.png")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
@@ -219,11 +219,11 @@ func _draw():
 		var p2 = (trail[i] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
 		draw_line(p1, p2, ORANGE, 2)
 
-	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(17, 17))
+	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
-	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(17, 17))
+	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(45, 45))
 	draw_texture_rect(heart_img, heart_rect, false)
-	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(17, 17))
+	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(45, 45))
 	draw_texture_rect(brain_img, brain_rect, false)
 
 	# draw_texture_rect(player_img, player_rect, false)
