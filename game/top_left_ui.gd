@@ -3,7 +3,7 @@ extends CanvasLayer
 var maze_reference = null
 
 # Adjust these margins as needed
-var margin_x = 40  # Horizontal margin from the maze
+var margin_x = 20  # Horizontal margin from the maze
 var margin_y = 20  # Vertical margin from the top of the screen
 
 func _ready():
