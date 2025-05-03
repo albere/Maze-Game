@@ -29,10 +29,9 @@ offset_bottom = 40.0
 
 [node name="Topleftbuttons" type="TextureRect" parent="Control"]
 layout_mode = 0
-offset_left = 666.0
-offset_top = 6.0
-offset_right = 935.0
-offset_bottom = 323.0
+offset_left = 648.0
+offset_right = 917.0
+offset_bottom = 317.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_tmbhc")
 expand_mode = 1
