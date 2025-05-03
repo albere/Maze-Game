@@ -219,11 +219,11 @@ func _draw():
 		var p2 = (trail[i] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
 		draw_line(p1, p2, ORANGE, 2)
 
-	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
+	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(CELL_SIZE, CELL_SIZE))
 	draw_texture_rect(player_img, player_rect, false)
-	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(20, 20))
+	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(CELL_SIZE, CELL_SIZE))
 	draw_texture_rect(heart_img, heart_rect, false)
-	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(20, 20))
+	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(CELL_SIZE, CELL_SIZE))
 	draw_texture_rect(brain_img, brain_rect, false)
 
 	# draw_texture_rect(player_img, player_rect, false)
