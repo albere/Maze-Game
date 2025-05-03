@@ -219,9 +219,9 @@ func handle_input():
 func show_ending(type):
 	var video_path = ""
 	if type == "Heart":
-		video_path = "res://assets/heart_ending.ogv"  # You'll need to add this video
+		video_path = "res://assets/webop480v5.ogv"  # You'll need to add this video
 	else:  # Brain
-		video_path = "res://assets/brain_ending.ogv"  # You'll need to add this video
+		video_path = "res://assets/webop480v5.ogv"  # You'll need to add this video
 		video_overlay.show_video(video_path)
 
 func _draw():
