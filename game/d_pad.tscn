@@ -66,9 +66,7 @@ scale = Vector2(0.78, 0.78)
 script = ExtResource("1_4we4i")
 
 [node name="Up" type="TouchScreenButton" parent="Blanklayer/DPad"]
-top_level = true
-position = Vector2(428, 289)
-scale = Vector2(0.780488, 0.766667)
+position = Vector2(128, -8)
 texture_normal = SubResource("AtlasTexture_4we4i")
 texture_pressed = SubResource("AtlasTexture_wheci")
 
