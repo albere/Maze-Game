@@ -6,6 +6,11 @@ signal move_down
 signal move_left
 signal move_right
 
+var up_held = false
+var down_held = false
+var left_held = false
+var right_held = false
+
 func _ready():
 	# Get parent references
 	var parent = get_parent()
@@ -22,32 +27,69 @@ func _ready():
 		  "Down:", down_btn != null,
 		  "Left:", left_btn != null,
 		  "Right:", right_btn != null)
+		
+	set_process(true)
 
 	# Connect signals if they're not already connected
-	if up_btn and !up_btn.is_connected("pressed", _on_up_pressed):
+	if up_btn:
 		up_btn.pressed.connect(_on_up_pressed)
+		up_btn.released.connect(_on_up_released)
 
-	if down_btn and !down_btn.is_connected("pressed", _on_down_pressed):
+	if down_btn:
 		down_btn.pressed.connect(_on_down_pressed)
+		down_btn.released.connect(_on_down_released)
 
-	if left_btn and !left_btn.is_connected("pressed", _on_left_pressed):
+	if left_btn:
 		left_btn.pressed.connect(_on_left_pressed)
+		left_btn.released.connect(_on_left_released)
 
-	if right_btn and !right_btn.is_connected("pressed", _on_right_pressed):
+	if right_btn:
 		right_btn.pressed.connect(_on_right_pressed)
+		right_btn.released.connect(_on_right_released)
 
-func _on_up_pressed() -> void:
-	print("Up pressed - emitting move_up signal")
-	emit_signal("move_up")
+# Button handlers
+func _on_up_pressed():
+	print("Up pressed - starting continuous movement")
+	up_held = true
+	emit_signal("move_up")  # Immediate first move
 
-func _on_down_pressed() -> void:
-	print("Down pressed - emitting move_down signal")
+func _on_up_released():
+	print("Up released - stopping movement")
+	up_held = false
+
+func _on_down_pressed():
+	print("Down pressed - starting continuous movement")
+	down_held = true
 	emit_signal("move_down")
 
-func _on_left_pressed() -> void:
-	print("Left pressed - emitting move_left signal")
-	emit_signal("move_left")  # Fixed - was emitting "move_right"
+func _on_down_released():
+	print("Down released - stopping movement")
+	down_held = false
 
-func _on_right_pressed() -> void:
-	print("Right pressed - emitting move_right signal")
+func _on_left_pressed():
+	print("Left pressed - starting continuous movement")
+	left_held = true
+	emit_signal("move_left")
+
+func _on_left_released():
+	print("Left released - stopping movement")
+	left_held = false
+
+func _on_right_pressed():
+	print("Right pressed - starting continuous movement")
+	right_held = true
 	emit_signal("move_right")
+
+func _on_right_released():
+	print("Right released - stopping movement")
+	right_held = false
+
+func _process(delta):
+	if up_held:
+		emit_signal("move_up")
+	if down_held:
+		emit_signal("move_down")
+	if left_held:
+		emit_signal("move_left")
+	if right_held:
+		emit_signal("move_right")

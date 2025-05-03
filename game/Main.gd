@@ -12,8 +12,8 @@ const WHITE = Color(1, 1, 1)
 const ORANGE = Color(0.91, 0.71, 0.19)
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
-@onready var heart_img = preload("res://assets/heart.png")
-@onready var brain_img = preload("res://assets/brain.jpg")
+@onready var heart_img = preload("res://assets/Mental.png")
+@onready var brain_img = preload("res://assets/City.png")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
@@ -30,6 +30,7 @@ var last_move_time = 0
 var move_delay = 0.2
 var dpad_width = 100
 var dpad_height = 100
+var can_move = true
 
 # Define these functions first, before calling them
 
@@ -65,7 +66,7 @@ func _ready():
 		print("Border sprite position set to:", border_sprite.position)
 
 	# Scale the border to fit the maze size
-		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0)
+		var scale_factor = max(WIDTH / 1404.0, HEIGHT / 1400.0) + 0.01
 		border_sprite.scale = Vector2(scale_factor, scale_factor)
 		print("Border scale factor:", scale_factor)
 		print("Border sprite scale set to:", border_sprite.scale)
@@ -89,24 +90,32 @@ func _ready():
 
 # Add these handler functions
 func _on_dpad_move_up():
-	if maze[player_pos.y - 1][player_pos.x] == 0:
+	if can_move and maze[player_pos.y - 1][player_pos.x] == 0:
 		var new_pos = player_pos + Vector2(0, -1)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_down():
-	if maze[player_pos.y + 1][player_pos.x] == 0:
+	if can_move and maze[player_pos.y + 1][player_pos.x] == 0:
 		var new_pos = player_pos + Vector2(0, 1)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_left():
-	if maze[player_pos.y][player_pos.x - 1] == 0:
+	if can_move and maze[player_pos.y][player_pos.x - 1] == 0:
 		var new_pos = player_pos + Vector2(-1, 0)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 func _on_dpad_move_right():
-	if maze[player_pos.y][player_pos.x + 1] == 0:
+	if can_move and maze[player_pos.y][player_pos.x + 1] == 0:
 		var new_pos = player_pos + Vector2(1, 0)
 		process_movement(new_pos)
+		last_move_time = 0
+		can_move = false
 
 # Add a helper function to handle movement logic
 func process_movement(new_pos):
@@ -162,6 +171,7 @@ func _is_valid(x, y):
 func _process(delta):
 	last_move_time += delta
 	if last_move_time >= move_delay:
+		can_move = true
 		handle_input()
 		last_move_time = 0
 	queue_redraw()
@@ -221,10 +231,16 @@ func _draw():
 
 	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
-	var heart_rect = Rect2(((end_1 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(20, 20))
+	
+	var heart_pos = end_1 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
+	var heart_rect = Rect2(heart_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(heart_img, heart_rect, false)
-	var brain_rect = Rect2(((end_2 + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE), Vector2(20, 20))
+	
+	# Brain icon - shift one square up and left
+	var brain_pos = end_2 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
+	var brain_rect = Rect2(brain_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(brain_img, brain_rect, false)
+
 
 	# draw_texture_rect(player_img, player_rect, false)
 	# draw_texture(player_img, (player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE)
