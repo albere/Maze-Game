@@ -52,6 +52,7 @@ ARG GODOT_DISABLE_3D="yes"
 ARG GODOT_DISABLE_ADVANCED_GUI="yes"
 ARG GODOT_PRODUCTION="yes"
 ARG GODOT_MINIZIP="yes"
+ARG GODOT_JS_LIBRARY_MODE="no"
 ARG GODOT_MODULE_FREETYPE_ENABLED="yes"
 ARG GODOT_MODULE_OGG_ENABLED="yes"
 ARG GODOT_MODULE_VORBIS_ENABLED="yes"
@@ -105,6 +106,7 @@ RUN /opt/emscripten_setup.sh scons platform=web target=template_release tools=no
     disable_advanced_gui=${GODOT_DISABLE_ADVANCED_GUI} \
     production=${GODOT_PRODUCTION} \
     minizip=${GODOT_MINIZIP} \
+    js_library_mode=${GODOT_JS_LIBARARY_MODE} \
     module_freetype_enabled=${GODOT_MODULE_FREETYPE_ENABLED} \
     module_ogg_enabled=${GODOT_MODULE_OGG_ENABLED} \
     module_vorbis_enabled=${GODOT_MODULE_VORBIS_ENABLED} \
