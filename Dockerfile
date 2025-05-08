@@ -164,7 +164,7 @@ RUN /opt/emscripten_setup.sh scons \
     module_squish_enabled=${GODOT_MODULE_SQUISH_ENABLED} \
     module_visual_script_enabled=${GODOT_MODULE_VISUAL_SCRIPT_ENABLED} \
     -j$(nproc) \
-    && ZIP_THREAD_SUFFIX=$([ "${GODOT_THREADS_ENABLED}" = "yes" ] && echo "" || echo ".nothreads")
+    && ZIP_THREAD_SUFFIX=$([ "${GODOT_THREADS_ENABLED}" = "yes" ] && echo "" || echo ".nothreads") \
     && mkdir -p /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/ \
     && cp -r "bin/godot.${GODOT_PLATFORM}.${GODOT_TARGET}.wasm32.${ZIP_THREAD_SUFFIX}.zip" \
            /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
