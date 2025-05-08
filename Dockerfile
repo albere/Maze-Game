@@ -54,6 +54,15 @@ ARG GODOT_PRODUCTION="yes"
 ARG GODOT_MINIZIP="yes"
 ARG GODOT_JS_LIBRARY_MODE="no"
 ARG GODOT_EXTRA_EMSCRIPTEN_ARGS="-s DISABLE_FETCH_DURING_RUNTIME=0 -s FORCE_FILESYSTEM=1 -s USE_PTHREADS=0 -s PTHREAD_POOL_SIZE=0"
+ARG GODOT_JAVASCRIPT_EVAL="yes"
+ARG GODOT_THREADS_ENABLED="no"
+ARG GODOT_TOOLS=no
+ARG GODOT_TARGET=template_release
+ARG GODOT_PLATFORM=web
+ARG GODOT_STRICT_CHECKS=yes
+ARG GODOT_USE_CLOSURE_COMPILER=yes
+ARG GODOT_WARNINGS=extra
+ARG GODOT_WERROR=yes
 ARG GODOT_MODULE_FREETYPE_ENABLED="yes"
 ARG GODOT_MODULE_OGG_ENABLED="yes"
 ARG GODOT_MODULE_VORBIS_ENABLED="yes"
@@ -91,15 +100,22 @@ ARG GODOT_MODULE_OPUS_ENABLED="no"
 ARG GODOT_MODULE_REGEX_ENABLED="no"
 ARG GODOT_MODULE_SQUISH_ENABLED="no"
 ARG GODOT_MODULE_VISUAL_SCRIPT_ENABLED="no"
-ARG GODOT_JAVASCRIPT_EVAL="yes"
-ARG GODOT_THREADS_ENABLED="no"
 WORKDIR /src
 RUN git clone --branch ${GODOT_VERSION}-stable --depth 1 https://github.com/godotengine/godot.git
 WORKDIR /src/godot
-RUN /opt/emscripten_setup.sh scons platform=web target=template_release tools=no \
+RUN /opt/emscripten_setup.sh scons \
+    verbose=${GODOT_BUILD_VERSBOSE} \
+    warnings=${GODOT_WARNINGS} \
+    werror=${GODOT_WERROR} \
+    use_closure_compiler=${GODOT_USE_CLOSURE_COMPILER} \
+    strict_checks=${GODOT_STRICT_CHECKS} \
+    platform=${GODOT_PLATFORM} \
+    target=${GODOT_TARGET} \
+    tools=${GODOT_TOOLS} \
     use_dlink=${GODOT_USE_DLINK} \
     use_lto=${GODOT_USE_LTO} \
     javascript_eval=${GODOT_JAVASCRIPT_EVAL} \
+    threads=${GODOT_THREADS_ENABLED} \
     threads_enabled=${GODOT_THREADS_ENABLED} \
     optimize=${GODOT_OPTIMIZE} \
     debug_symbols=${GODOT_DEBUG_SYMBOLS} \
