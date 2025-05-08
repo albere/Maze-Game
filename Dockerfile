@@ -45,6 +45,7 @@ EOF
 RUN chmod +x /opt/emscripten_setup.sh
 ARG GODOT_VERSION="4.4"
 ARG GODOT_USE_LTO="yes"
+ARG GODOT_USE_DLINK="yes"
 ARG GODOT_OPTIMIZE="size"
 ARG GODOT_DEBUG_SYMBOLS="no"
 ARG GODOT_DISABLE_3D="yes"
@@ -81,7 +82,7 @@ ARG GODOT_MODULE_MBEDTLS_ENABLED="yes"
 ARG GODOT_MODULE_UPNP_ENABLED="no"
 ARG GODOT_MODULE_WEBRTC_ENABLED="no"
 ARG GODOT_MODULE_WEBSOCKET_ENABLED="no"
-ARG GODOT_MODULE_GDNATIVE_ENABLED="yes"
+ARG GODOT_MODULE_GDNATIVE_ENABLED="no"
 ARG GODOT_MODULE_MONO_ENABLED="no"
 ARG GODOT_MODULE_OPENSIMPLEX_ENABLED="no"
 ARG GODOT_MODULE_OPUS_ENABLED="no"
@@ -94,7 +95,10 @@ WORKDIR /src
 RUN git clone --branch ${GODOT_VERSION}-stable --depth 1 https://github.com/godotengine/godot.git
 WORKDIR /src/godot
 RUN /opt/emscripten_setup.sh scons platform=web target=template_release tools=no \
+    use_dlink=${GODOT_USE_DLINK} \
     use_lto=${GODOT_USE_LTO} \
+    javascript_eval=${GODOT_JAVASCRIPT_EVAL} \
+    threads_enabled=${GODOT_THREADS_ENABLED} \
     optimize=${GODOT_OPTIMIZE} \
     debug_symbols=${GODOT_DEBUG_SYMBOLS} \
     disable_3d=${GODOT_DISABLE_3D} \
@@ -138,8 +142,6 @@ RUN /opt/emscripten_setup.sh scons platform=web target=template_release tools=no
     module_regex_enabled=${GODOT_MODULE_REGEX_ENABLED} \
     module_squish_enabled=${GODOT_MODULE_SQUISH_ENABLED} \
     module_visual_script_enabled=${GODOT_MODULE_VISUAL_SCRIPT_ENABLED} \
-    javascript_eval=${GODOT_JAVASCRIPT_EVAL} \
-    threads_enabled=${GODOT_THREADS_ENABLED} \
     -j$(nproc) \
     && mkdir -p /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/ \
     && cp -r bin/godot.web.template_release.wasm32.zip /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
