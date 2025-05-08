@@ -105,7 +105,7 @@ WORKDIR /src
 RUN git clone --branch ${GODOT_VERSION}-stable --depth 1 https://github.com/godotengine/godot.git
 WORKDIR /src/godot
 RUN /opt/emscripten_setup.sh scons \
-    verbose=${GODOT_BUILD_VERSBOSE} \
+    verbose=${GODOT_BUILD_VERBOSE} \
     warnings=${GODOT_WARNINGS} \
     werror=${GODOT_WERROR} \
     use_closure_compiler=${GODOT_USE_CLOSURE_COMPILER} \
