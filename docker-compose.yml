@@ -17,7 +17,9 @@ services:
     restart: always
 
   deploy:
-    image: albere/godot-web:main
+    build:
+      context: .
+      target: godot
     volumes:
     - ./game:/src/build/game
     working_dir: /src/build/game
