@@ -166,7 +166,8 @@ RUN /opt/emscripten_setup.sh scons \
     -j$(nproc) \
     && ZIP_THREAD_SUFFIX=$([ "${GODOT_THREADS_ENABLED}" = "yes" ] && echo "" || echo ".nothreads") \
     && mkdir -p /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/ \
-    && cp -r "bin/godot.${GODOT_PLATFORM}.${GODOT_TARGET}.wasm32.${ZIP_THREAD_SUFFIX}.zip" \
+    && find bin/ \
+    && cp -r "bin/godot.${GODOT_PLATFORM}.${GODOT_TARGET}.wasm32${ZIP_THREAD_SUFFIX}.zip" \
            /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
 
 FROM albere/godot-web:main AS godot
