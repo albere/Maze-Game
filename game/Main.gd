@@ -14,6 +14,9 @@ const BLUE = Color("#7DF9FF")
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
 @onready var brain_img = preload("res://assets/City.png")
+@onready var endpoint1_overlay = preload("res://assets/titlecardheart.png")
+@onready var endpoint2_overlay = preload("res://assets/titlecardcity.png")
+@onready var endpoint2_first_overlay = preload("res://assets/titlecardfail.png")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
@@ -31,6 +34,10 @@ var move_delay = 0.2
 var dpad_width = 100
 var dpad_height = 100
 var can_move = true
+var endpoint1_reached = false
+var endpoint2_reached = false
+var show_overlay = false
+var current_overlay_texture = null
 
 # Define these functions first, before calling them
 
@@ -126,8 +133,21 @@ func process_movement(new_pos):
 	player_pos = new_pos
 
 	if player_pos == end_1:
+		if not endpoint1_reached:
+			endpoint1_reached = true
+			show_overlay = true
+			current_overlay_texture = endpoint1_overlay
 		show_message("Heart")
 	elif player_pos == end_2:
+		if not endpoint2_reached:
+			endpoint2_reached = true
+			show_overlay = true
+
+			# Check if this is the first endpoint reached
+			if not endpoint1_reached:
+				current_overlay_texture = endpoint2_first_overlay
+			else:
+				current_overlay_texture = endpoint2_overlay
 		show_message("Brain")
 
 func reset_maze():
@@ -138,6 +158,12 @@ func reset_maze():
 	player_pos = Vector2(COLS / 2, ROWS / 2)
 	maze[player_pos.y][player_pos.x] = 0
 	trail = [player_pos]
+
+	# Reset overlay state
+	endpoint1_reached = false
+	endpoint2_reached = false
+	show_overlay = false
+	current_overlay_texture = null
 
 func generate_maze():
 	var m = []
@@ -198,9 +224,27 @@ func handle_input():
 		player_pos = new_pos
 
 		if player_pos == end_1:
+			if not endpoint1_reached:
+				endpoint1_reached = true
+				show_overlay = true
+				current_overlay_texture = endpoint1_overlay
 			show_message("Heart")
 		elif player_pos == end_2:
+			if not endpoint2_reached:
+				endpoint2_reached = true
+				show_overlay = true
+
+				# Check if this is the first endpoint reached
+				if not endpoint1_reached:
+					current_overlay_texture = endpoint2_first_overlay
+				else:
+					current_overlay_texture = endpoint2_overlay
 			show_message("Brain")
+
+func _input(event):
+	if show_overlay and (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")):
+		show_overlay = false
+		current_overlay_texture = null
 
 func show_message(text):
 	var label = Label.new()
@@ -236,6 +280,11 @@ func _draw():
 	var brain_pos = end_2 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
 	var brain_rect = Rect2(brain_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(brain_img, brain_rect, false)
+
+	# Draw overlay if needed
+	if show_overlay and current_overlay_texture:
+		var overlay_rect = Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT))
+		draw_texture_rect(current_overlay_texture, overlay_rect, false)
 
 
 	# draw_texture_rect(player_img, player_rect, false)
