@@ -1,15 +1,15 @@
 extends Node2D
 
 const CELL_SIZE = 15
-const ROWS = 41
-const COLS = 41
+const ROWS = 31
+const COLS = 31
 const BORDER_WIDTH = 2
 const WIDTH = (COLS + BORDER_WIDTH * 2) * CELL_SIZE
 const HEIGHT = (ROWS + BORDER_WIDTH * 2) * CELL_SIZE
 
 const BLACK = Color(0, 0, 0)
 const WHITE = Color(1, 1, 1)
-const BLUE = Color(0.07, 0.22, 0.49)
+const BLUE = Color("#7DF9FF)
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
