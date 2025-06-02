@@ -7,9 +7,9 @@ const BORDER_WIDTH = 2
 const WIDTH = (COLS + BORDER_WIDTH * 2) * CELL_SIZE
 const HEIGHT = (ROWS + BORDER_WIDTH * 2) * CELL_SIZE
 
-const DARK_BLUE = Color(0.07, 0.22, 0.49)
+const BLACK = Color(0, 0, 0)
 const WHITE = Color(1, 1, 1)
-const ORANGE = Color(0.91, 0.71, 0.19)
+const BLUE = Color(0.07, 0.22, 0.49)
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
@@ -213,17 +213,17 @@ func show_message(text):
 	label.queue_free()
 
 func _draw():
-	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), DARK_BLUE)
+	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), BLACK)
 	for y in range(ROWS):
 		for x in range(COLS):
-			var color = WHITE if maze[y][x] == 0 else DARK_BLUE
+			var color = WHITE if maze[y][x] == 0 else BLACK
 			var rect = Rect2(Vector2((x + BORDER_WIDTH) * CELL_SIZE, (y + BORDER_WIDTH) * CELL_SIZE), Vector2(CELL_SIZE, CELL_SIZE))
 			draw_rect(rect, color)
 
 	for i in range(1, trail.size()):
 		var p1 = (trail[i - 1] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
 		var p2 = (trail[i] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
-		draw_line(p1, p2, ORANGE, 2)
+		draw_line(p1, p2, BLUE, 2)
 
 	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
