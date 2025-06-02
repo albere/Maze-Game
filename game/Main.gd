@@ -127,10 +127,8 @@ func process_movement(new_pos):
 
 	if player_pos == end_1:
 		show_message("Heart")
-		reset_maze()
 	elif player_pos == end_2:
 		show_message("Brain")
-		reset_maze()
 
 func reset_maze():
 	var m = generate_maze()
@@ -201,10 +199,8 @@ func handle_input():
 
 		if player_pos == end_1:
 			show_message("Heart")
-			reset_maze()
 		elif player_pos == end_2:
 			show_message("Brain")
-			reset_maze()
 
 func show_message(text):
 	var label = Label.new()
@@ -231,11 +227,11 @@ func _draw():
 
 	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
-	
+
 	var heart_pos = end_1 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
 	var heart_rect = Rect2(heart_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(heart_img, heart_rect, false)
-	
+
 	# Brain icon - shift one square up and left
 	var brain_pos = end_2 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
 	var brain_rect = Rect2(brain_pos * CELL_SIZE, Vector2(45, 45))
