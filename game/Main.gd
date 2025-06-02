@@ -138,7 +138,6 @@ func process_movement(new_pos):
 			endpoint1_reached = true
 			show_overlay = true
 			current_overlay_texture = endpoint1_overlay
-		show_message("Heart")
 	elif player_pos == end_2:
 		if not endpoint2_reached:
 			endpoint2_reached = true
@@ -147,7 +146,7 @@ func process_movement(new_pos):
 			if not endpoint1_reached:
 				show_overlay = true
 				current_overlay_texture = endpoint2_first_overlay
-			else:
+			elif endpoint1_reached and endpoint2_reached:
 				# Both endpoints reached in correct order - show endpoint2 overlay first
 				show_overlay = true
 				current_overlay_texture = endpoint2_overlay
@@ -230,7 +229,6 @@ func handle_input():
 				endpoint1_reached = true
 				show_overlay = true
 				current_overlay_texture = endpoint1_overlay
-			show_message("Heart")
 		elif player_pos == end_2:
 			if not endpoint2_reached:
 				endpoint2_reached = true
@@ -239,11 +237,10 @@ func handle_input():
 				if not endpoint1_reached:
 					show_overlay = true
 					current_overlay_texture = endpoint2_first_overlay
-				else:
+				elif endpoint1_reached and endpoint2_reached:
 					# Both endpoints reached in correct order - show endpoint2 overlay first
 					show_overlay = true
 					current_overlay_texture = endpoint2_overlay
-			show_message("Brain")
 
 func _input(event):
 	if show_overlay and (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")):
