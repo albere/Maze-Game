@@ -17,6 +17,7 @@ const BLUE = Color("#7DF9FF")
 @onready var endpoint1_overlay = preload("res://assets/titlecardheart.png")
 @onready var endpoint2_overlay = preload("res://assets/titlecardcity.png")
 @onready var endpoint2_first_overlay = preload("res://assets/titlecardfail.png")
+@onready var win_overlay = preload("res://assets/titlecardwin.png")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
@@ -141,12 +142,14 @@ func process_movement(new_pos):
 	elif player_pos == end_2:
 		if not endpoint2_reached:
 			endpoint2_reached = true
-			show_overlay = true
 
 			# Check if this is the first endpoint reached
 			if not endpoint1_reached:
+				show_overlay = true
 				current_overlay_texture = endpoint2_first_overlay
 			else:
+				# Both endpoints reached in correct order - show endpoint2 overlay first
+				show_overlay = true
 				current_overlay_texture = endpoint2_overlay
 		show_message("Brain")
 
@@ -232,19 +235,27 @@ func handle_input():
 		elif player_pos == end_2:
 			if not endpoint2_reached:
 				endpoint2_reached = true
-				show_overlay = true
 
 				# Check if this is the first endpoint reached
 				if not endpoint1_reached:
+					show_overlay = true
 					current_overlay_texture = endpoint2_first_overlay
 				else:
+					# Both endpoints reached in correct order - show endpoint2 overlay first
+					show_overlay = true
 					current_overlay_texture = endpoint2_overlay
 			show_message("Brain")
 
 func _input(event):
 	if show_overlay and (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")):
-		show_overlay = false
-		current_overlay_texture = null
+		# Check if we just dismissed the first endpoint overlay and both endpoints are reached
+		if current_overlay_texture == endpoint1_overlay and endpoint1_reached and endpoint2_reached:
+			# Show the win overlay
+			current_overlay_texture = win_overlay
+		else:
+			# Dismiss overlay completely
+			show_overlay = false
+			current_overlay_texture = null
 
 func show_message(text):
 	var label = Label.new()
