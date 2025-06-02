@@ -9,7 +9,7 @@ const HEIGHT = (ROWS + BORDER_WIDTH * 2) * CELL_SIZE
 
 const BLACK = Color(0, 0, 0)
 const WHITE = Color(1, 1, 1)
-const BLUE = Color("#7DF9FF)
+const BLUE = Color("#7DF9FF")
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
