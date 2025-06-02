@@ -151,7 +151,6 @@ func process_movement(new_pos):
 				# Both endpoints reached in correct order - show endpoint2 overlay first
 				show_overlay = true
 				current_overlay_texture = endpoint2_overlay
-		show_message("Brain")
 
 func reset_maze():
 	var m = generate_maze()
@@ -249,7 +248,7 @@ func handle_input():
 func _input(event):
 	if show_overlay and (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")):
 		# Check if we just dismissed the first endpoint overlay and both endpoints are reached
-		if current_overlay_texture == endpoint1_overlay and endpoint1_reached and endpoint2_reached:
+		if current_overlay_texture == endpoint2_overlay and endpoint1_reached and endpoint2_reached:
 			# Show the win overlay
 			current_overlay_texture = win_overlay
 		else:
