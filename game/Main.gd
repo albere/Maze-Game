@@ -1,6 +1,6 @@
 extends Node2D
 
-const CELL_SIZE = 15
+const CELL_SIZE = 20
 const ROWS = 31
 const COLS = 31
 const BORDER_WIDTH = 2
