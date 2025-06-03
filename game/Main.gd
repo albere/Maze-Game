@@ -146,6 +146,7 @@ func process_movement(new_pos):
 			if not endpoint1_reached:
 				show_overlay = true
 				current_overlay_texture = endpoint2_first_overlay
+                                endpoint2_reached = false
 			elif endpoint1_reached and endpoint2_reached:
 				# Both endpoints reached in correct order - show endpoint2 overlay first
 				show_overlay = true
