@@ -141,14 +141,13 @@ func process_movement(new_pos):
 	elif player_pos == end_2:
 		if not endpoint2_reached:
 			endpoint2_reached = true
-
-			# Check if this is the first endpoint reached
 			if not endpoint1_reached:
+				# Reached city first - show fail and reset
 				show_overlay = true
 				current_overlay_texture = endpoint2_first_overlay
-                                endpoint2_reached = false
-			elif endpoint1_reached and endpoint2_reached:
-				# Both endpoints reached in correct order - show endpoint2 overlay first
+				endpoint2_reached = false
+			else:
+				# Reached city after heart - show city overlay
 				show_overlay = true
 				current_overlay_texture = endpoint2_overlay
 
@@ -233,13 +232,13 @@ func handle_input():
 		elif player_pos == end_2:
 			if not endpoint2_reached:
 				endpoint2_reached = true
-
-				# Check if this is the first endpoint reached
 				if not endpoint1_reached:
+					# Reached city first - show fail and reset
 					show_overlay = true
 					current_overlay_texture = endpoint2_first_overlay
-				elif endpoint1_reached and endpoint2_reached:
-					# Both endpoints reached in correct order - show endpoint2 overlay first
+					endpoint2_reached = false
+				else:
+					# Reached city after heart - show city overlay
 					show_overlay = true
 					current_overlay_texture = endpoint2_overlay
 
