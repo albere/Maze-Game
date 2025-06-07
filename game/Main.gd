@@ -1,19 +1,23 @@
 extends Node2D
 
-const CELL_SIZE = 15
-const ROWS = 41
-const COLS = 41
+const CELL_SIZE = 19.285714285714
+const ROWS = 31
+const COLS = 31
 const BORDER_WIDTH = 2
 const WIDTH = (COLS + BORDER_WIDTH * 2) * CELL_SIZE
 const HEIGHT = (ROWS + BORDER_WIDTH * 2) * CELL_SIZE
 
-const DARK_BLUE = Color(0.07, 0.22, 0.49)
+const BLACK = Color(0, 0, 0)
 const WHITE = Color(1, 1, 1)
-const ORANGE = Color(0.91, 0.71, 0.19)
+const BLUE = Color("#7DF9FF")
 
 @onready var player_img = preload("res://assets/VajraIcon.png")
 @onready var heart_img = preload("res://assets/Mental.png")
 @onready var brain_img = preload("res://assets/City.png")
+@onready var endpoint1_overlay = preload("res://assets/titlecardheart.png")
+@onready var endpoint2_overlay = preload("res://assets/titlecardcity.png")
+@onready var endpoint2_first_overlay = preload("res://assets/titlecardfail.png")
+@onready var win_overlay = preload("res://assets/titlecardwin.png")
 
 # Add this near your other preloads in Main.gd
 @onready var dpad_scene = preload("res://d_pad.tscn")
@@ -31,6 +35,10 @@ var move_delay = 0.2
 var dpad_width = 100
 var dpad_height = 100
 var can_move = true
+var endpoint1_reached = false
+var endpoint2_reached = false
+var show_overlay = false
+var current_overlay_texture = null
 
 # Define these functions first, before calling them
 
@@ -126,13 +134,27 @@ func process_movement(new_pos):
 	player_pos = new_pos
 
 	if player_pos == end_1:
-		show_message("Heart")
-		reset_maze()
+		print("At heart - endpoint1_reached: ", endpoint1_reached)
+		if not endpoint1_reached:
+			print("Showing heart overlay")
+			endpoint1_reached = true
+			show_overlay = true
+			current_overlay_texture = endpoint1_overlay
 	elif player_pos == end_2:
-		show_message("Brain")
-		reset_maze()
+		if not endpoint2_reached:
+			endpoint2_reached = true
+			if not endpoint1_reached:
+				# Reached city first - show fail and reset
+				show_overlay = true
+				current_overlay_texture = endpoint2_first_overlay
+				endpoint2_reached = false
+			else:
+				# Reached city after heart - show city overlay
+				show_overlay = true
+				current_overlay_texture = endpoint2_overlay
 
 func reset_maze():
+	print("RESET CALLED - endpoint1_reached set to false")
 	var m = generate_maze()
 	m[end_1.y][end_1.x] = 0
 	m[end_2.y][end_2.x] = 0
@@ -140,6 +162,12 @@ func reset_maze():
 	player_pos = Vector2(COLS / 2, ROWS / 2)
 	maze[player_pos.y][player_pos.x] = 0
 	trail = [player_pos]
+
+	# Reset overlay state
+	endpoint1_reached = false
+	endpoint2_reached = false
+	show_overlay = false
+	current_overlay_texture = null
 
 func generate_maze():
 	var m = []
@@ -200,11 +228,35 @@ func handle_input():
 		player_pos = new_pos
 
 		if player_pos == end_1:
-			show_message("Heart")
-			reset_maze()
+			print("At heart - endpoint1_reached: ", endpoint1_reached)
+			if not endpoint1_reached:
+				print("Showing heart overlay")
+				endpoint1_reached = true
+				show_overlay = true
+				current_overlay_texture = endpoint1_overlay
 		elif player_pos == end_2:
-			show_message("Brain")
-			reset_maze()
+			if not endpoint2_reached:
+				endpoint2_reached = true
+				if not endpoint1_reached:
+					# Reached city first - show fail and reset
+					show_overlay = true
+					current_overlay_texture = endpoint2_first_overlay
+					endpoint2_reached = false
+				else:
+					# Reached city after heart - show city overlay
+					show_overlay = true
+					current_overlay_texture = endpoint2_overlay
+
+func _input(event):
+	if show_overlay and (event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel")):
+		# Check if we just dismissed the first endpoint overlay and both endpoints are reached
+		if current_overlay_texture == endpoint2_overlay and endpoint1_reached and endpoint2_reached:
+			# Show the win overlay
+			current_overlay_texture = win_overlay
+		else:
+			# Dismiss overlay completely
+			show_overlay = false
+			current_overlay_texture = null
 
 func show_message(text):
 	var label = Label.new()
@@ -217,29 +269,34 @@ func show_message(text):
 	label.queue_free()
 
 func _draw():
-	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), DARK_BLUE)
+	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), BLACK)
 	for y in range(ROWS):
 		for x in range(COLS):
-			var color = WHITE if maze[y][x] == 0 else DARK_BLUE
+			var color = WHITE if maze[y][x] == 0 else BLACK
 			var rect = Rect2(Vector2((x + BORDER_WIDTH) * CELL_SIZE, (y + BORDER_WIDTH) * CELL_SIZE), Vector2(CELL_SIZE, CELL_SIZE))
 			draw_rect(rect, color)
 
 	for i in range(1, trail.size()):
 		var p1 = (trail[i - 1] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
 		var p2 = (trail[i] + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE + Vector2(CELL_SIZE / 2, CELL_SIZE / 2)
-		draw_line(p1, p2, ORANGE, 2)
+		draw_line(p1, p2, BLUE, 2)
 
 	var player_rect = Rect2((player_pos + Vector2(BORDER_WIDTH, BORDER_WIDTH)) * CELL_SIZE, Vector2(20, 20))
 	draw_texture_rect(player_img, player_rect, false)
-	
+
 	var heart_pos = end_1 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
 	var heart_rect = Rect2(heart_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(heart_img, heart_rect, false)
-	
+
 	# Brain icon - shift one square up and left
 	var brain_pos = end_2 + Vector2(BORDER_WIDTH - 1, BORDER_WIDTH - 1)  # Subtract 1 from both x and y
 	var brain_rect = Rect2(brain_pos * CELL_SIZE, Vector2(45, 45))
 	draw_texture_rect(brain_img, brain_rect, false)
+
+	# Draw overlay if needed
+	if show_overlay and current_overlay_texture:
+		var overlay_rect = Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT))
+		draw_texture_rect(current_overlay_texture, overlay_rect, false)
 
 
 	# draw_texture_rect(player_img, player_rect, false)
