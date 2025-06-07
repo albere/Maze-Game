@@ -159,7 +159,7 @@ func reset_maze():
 	m[end_1.y][end_1.x] = 0
 	m[end_2.y][end_2.x] = 0
 	maze = m
-	player_pos = Vector2(COLS / 2, ROWS - 4)
+	player_pos = Vector2(COLS / 2, ROWS - 2)
 	maze[player_pos.y][player_pos.x] = 0
 	trail = [player_pos]
 
