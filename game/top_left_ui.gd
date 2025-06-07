@@ -118,7 +118,7 @@ func _on_reset_pressed():
 	print("Reset button pressed!")
 	if maze_reference:
 		# Reset player position to center of maze
-		maze_reference.player_pos = Vector2(maze_reference.COLS / 2, maze_reference.ROWS / 2)
+		maze_reference.player_pos = Vector2(maze_reference.COLS / 2, maze_reference.ROWS / - 2)
 		# Clear trail except for current position
 		maze_reference.trail = [maze_reference.player_pos]
 		
