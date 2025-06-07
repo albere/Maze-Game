@@ -253,6 +253,9 @@ func _input(event):
 		if current_overlay_texture == endpoint2_overlay and endpoint1_reached and endpoint2_reached:
 			# Show the win overlay
 			current_overlay_texture = win_overlay
+		elif current_overlay_texture == win_overlay:
+			# Win overlay dismissed - redirect to success page!
+			redirect_to_page("https://www.instagram.com/vajra_film/")
 		else:
 			# Dismiss overlay completely
 			show_overlay = false
@@ -267,6 +270,11 @@ func show_message(text):
 	await get_tree().create_timer(2).timeout
 	remove_child(label)
 	label.queue_free()
+	
+func redirect_to_page(url: String):
+	if OS.has_feature("web"):
+		var js_code = "window.location.href = '" + url + "';"
+		JavaScriptBridge.eval(js_code)
 
 func _draw():
 	draw_rect(Rect2(Vector2(0, 0), Vector2(WIDTH, HEIGHT)), BLACK)
