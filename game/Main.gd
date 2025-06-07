@@ -134,7 +134,9 @@ func process_movement(new_pos):
 	player_pos = new_pos
 
 	if player_pos == end_1:
+		print("At heart - endpoint1_reached: ", endpoint1_reached)
 		if not endpoint1_reached:
+			print("Showing heart overlay")
 			endpoint1_reached = true
 			show_overlay = true
 			current_overlay_texture = endpoint1_overlay
@@ -152,6 +154,7 @@ func process_movement(new_pos):
 				current_overlay_texture = endpoint2_overlay
 
 func reset_maze():
+	print("RESET CALLED - endpoint1_reached set to false")
 	var m = generate_maze()
 	m[end_1.y][end_1.x] = 0
 	m[end_2.y][end_2.x] = 0
@@ -225,7 +228,9 @@ func handle_input():
 		player_pos = new_pos
 
 		if player_pos == end_1:
+			print("At heart - endpoint1_reached: ", endpoint1_reached)
 			if not endpoint1_reached:
+				print("Showing heart overlay")
 				endpoint1_reached = true
 				show_overlay = true
 				current_overlay_texture = endpoint1_overlay
