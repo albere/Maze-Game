@@ -121,6 +121,12 @@ func _on_reset_pressed():
 		maze_reference.player_pos = Vector2(maze_reference.COLS / 2, maze_reference.ROWS / 2)
 		# Clear trail except for current position
 		maze_reference.trail = [maze_reference.player_pos]
+		
+		maze_reference.endpoint1_reached = false
+		maze_reference.endpoint2_reached = false
+		maze_reference.show_overlay = false
+		maze_reference.current_overlay_texture = null
+		
 		print("Player reset to center position")
 	else:
 		print("Cannot reset player - maze reference not found")
