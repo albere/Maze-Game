@@ -20,7 +20,7 @@ const ORANGE = Color(0.91, 0.71, 0.19)
 @onready var screen_scene = preload("res://Screen.tscn")
 @onready var full_bg_scene = preload("res://background_full.tscn")
 @onready var top_left_ui_scene = preload("res://leftside.tscn")
-@onready var loading_screen_scene = preload("res://LoadingScreen.tscn")
+#@onready var loading_screen_scene = preload("res://LoadingScreen.tscn")
 
 var maze = []
 var trail = []
@@ -42,15 +42,25 @@ func _ready():
 	show_loading_screen()
 
 func show_loading_screen():
-	loading_screen = loading_screen_scene.instantiate()
-	get_tree().root.add_child(loading_screen)
-	
-	# Connect to the loading finished signal
-	loading_screen.loading_finished.connect(_on_loading_finished)
-	
-	# Start initializing the game in the background
-	call_deferred("initialize_game")
-
+	if ResourceLoader.exists("res://LoadingScreen.tscn"):
+		var loading_screen_scene = load("res://LoadingScreen.tscn")
+		if loading_screen_scene:
+			loading_screen = loading_screen_scene.instantiate()
+			add_child(loading_screen)
+			loading_screen.layer = 100  # Ensure it's on top
+			
+			# Connect to the loading finished signal
+			loading_screen.loading_finished.connect(_on_loading_finished)
+			
+			# Start initializing the game in the background
+			call_deferred("initialize_game")
+		else:
+			print("Failed to load LoadingScreen.tscn")
+			call_deferred("initialize_game")
+	else:
+		print("LoadingScreen.tscn not found")
+		call_deferred("initialize_game")
+		
 func initialize_game():
 	# Step 1: Generate maze
 	await get_tree().process_frame
