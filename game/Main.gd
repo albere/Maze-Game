@@ -43,7 +43,7 @@ func _ready():
 
 func show_loading_screen():
 	loading_screen = loading_screen_scene.instantiate()
-	add_child(loading_screen)
+	get_tree().root.add_child(loading_screen)
 	
 	# Connect to the loading finished signal
 	loading_screen.loading_finished.connect(_on_loading_finished)
@@ -54,36 +54,42 @@ func show_loading_screen():
 func initialize_game():
 	# Step 1: Generate maze
 	await get_tree().process_frame
-	loading_screen.set_progress(20.0, "Generating maze...")
+	if loading_screen:
+		loading_screen.set_progress(20.0, "Generating maze...")
 	maze = generate_maze()
 	reset_maze()
 	
 	# Step 2: Initialize game systems
 	await get_tree().create_timer(0.3).timeout
-	loading_screen.set_progress(40.0, "Loading game systems...")
+	if loading_screen:
+		loading_screen.set_progress(40.0, "Loading game systems...")
 	set_process(true)
 	queue_redraw()
 	
 	# Step 3: Load UI components
 	await get_tree().create_timer(0.3).timeout
-	loading_screen.set_progress(60.0, "Loading UI components...")
+	if loading_screen:
+		loading_screen.set_progress(60.0, "Loading UI components...")
 	setup_ui_components()
 	
 	# Step 4: Finalize setup
 	await get_tree().create_timer(0.3).timeout
-	loading_screen.set_progress(80.0, "Finalizing setup...")
+	if loading_screen:
+		loading_screen.set_progress(80.0, "Finalizing setup...")
 	setup_dpad_connections()
 	
 	# Step 5: Complete
 	await get_tree().create_timer(0.2).timeout
-	loading_screen.set_progress(100.0, "Ready to play!")
+	if loading_screen:
+		loading_screen.set_progress(100.0, "Ready to play!")
 	
 	# Mark game as initialized
 	game_initialized = true
 	
 	# Wait a moment then show continue option
 	await get_tree().create_timer(0.5).timeout
-	loading_screen.show_continue_option()
+	if loading_screen:
+		loading_screen.show_continue_option()
 
 func setup_ui_components():
 	# Add screen border
