@@ -11,15 +11,15 @@ const DARK_BLUE = Color(0.07, 0.22, 0.49)
 const WHITE = Color(1, 1, 1)
 const ORANGE = Color(0.91, 0.71, 0.19)
 
-@onready var player_img = preload("res://assets/VajraIcon.png")
-@onready var heart_img = preload("res://assets/Mental.png")
-@onready var brain_img = preload("res://assets/City.png")
+var player_img = preload("res://assets/VajraIcon.png")
+var heart_img = preload("res://assets/Mental.png")
+var brain_img = preload("res://assets/City.png")
 
 # Scene preloads
-@onready var dpad_scene = preload("res://d_pad.tscn")
-@onready var screen_scene = preload("res://Screen.tscn")
-@onready var full_bg_scene = preload("res://background_full.tscn")
-@onready var top_left_ui_scene = preload("res://leftside.tscn")
+var dpad_scene = preload("res://d_pad.tscn")
+var screen_scene = preload("res://Screen.tscn")
+var full_bg_scene = preload("res://background_full.tscn")
+var top_left_ui_scene = preload("res://leftside.tscn")
 #@onready var loading_screen_scene = preload("res://LoadingScreen.tscn")
 
 var maze = []
